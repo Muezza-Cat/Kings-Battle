@@ -1,0 +1,1 @@
+Kings Battle is a single player crowd controller game where,<br> we along with the enemies play the role of a king, fighting off enemies and capturing flags to gain points<br> which will lead us towards victory.
