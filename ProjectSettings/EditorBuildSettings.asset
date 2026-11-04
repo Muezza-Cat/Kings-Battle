@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScene.unity
     guid: 0c22ec42c90f901498dbe50ab7090185
   - enabled: 1
+    path: Assets/Scenes/BaseGrassScene(Small).unity
+    guid: 4f385ac5ff216a4489d4677b1f01fee8
+  - enabled: 1
+    path: Assets/Scenes/BaseDesertScene(Small).unity
+    guid: fc712ea594fea9242af797c0cff9bc0b
+  - enabled: 1
+    path: Assets/Scenes/Level_12.unity
+    guid: d034b1a30f61ff14bb7040783cc65c76
+  - enabled: 1
     path: Assets/Scenes/BasicSceneTemplate (Testing).unity
     guid: 136b6f634e676444dad668c5cea06ec6
   m_configObjects:

@@ -16,6 +16,15 @@ public class SaveSystem : MonoBehaviour
 
 
 
+    private static string SaveDirectoryPath => Path.Combine(Application.persistentDataPath, "Saves");
+    private static string SaveFilePath => Path.Combine(SaveDirectoryPath, "saveFile.sav");
+
+    private static void EnsureSaveDirectory()
+    {
+        Directory.CreateDirectory(SaveDirectoryPath);
+    }
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -53,23 +62,29 @@ public class SaveSystem : MonoBehaviour
     // - Saving when a game is completed (not done)
     public void SaveData()
     {
+        EnsureSaveDirectory();
+
         Debug.Log("Saved Data");
+        if (GameplayManager.Instance == null)
+        {
+            Debug.LogWarning("Null reference to GameplayManager");
+            return;
+        }
         string json = JsonUtility.ToJson(new MainSaveObjectClass()
         {
-            gameplayManagerSaveObject = GameplayManager.Instance.SaveOnLevelLoad(GameStateManager.Instance.IsGameOver()),
+            gameplayManagerSaveObject = GameplayManager.Instance.SaveOnLevelLoad(GameStateManager.Instance.IsGameOver() && GameStateManager.Instance.IsPlayerTheWinner()),
             objectPoolerSaveObject = ObjectPooler.Instance.Save(),
             unitSelectionWindowUISaveObject = UnitSelectionWindowUI.Instance.Save()
         });
 
-        if (GameplayManager.Instance == null) Debug.LogWarning("Null reference to GameplayManager");
-        File.WriteAllText(Application.dataPath + "/Saves/saveFile.sav" , json);
+        File.WriteAllText(SaveFilePath , json);
     }
 
 
     //Only run once when the game is opened.
     public void LoadLevelData()
     {
-        if (!File.Exists(Application.dataPath + "/Saves/saveFile.sav"))
+        if (!File.Exists(SaveFilePath))
         {
             return;
         }
@@ -77,22 +92,28 @@ public class SaveSystem : MonoBehaviour
         {
             loaderCallbackObject.SetActive(false);
 
-            string json = File.ReadAllText(Application.dataPath + "/Saves/saveFile.sav");
+            string json = File.ReadAllText(SaveFilePath);
 
             MainSaveObjectClass saveLoadSystem = JsonUtility.FromJson<MainSaveObjectClass>(json);
             //GameplayManager.Instance.Load(saveLoadSystem.gameplayManagerSaveObject);
 
-            SceneManager.LoadScene(SceneLoader.targetSceneIndex);
+            if (saveLoadSystem.gameplayManagerSaveObject.targetSceneIndex >= SceneManager.sceneCountInBuildSettings) 
+            {
+                saveLoadSystem.gameplayManagerSaveObject.targetSceneIndex = 1;
+            }
+
+            SceneManager.LoadScene(saveLoadSystem.gameplayManagerSaveObject.targetSceneIndex);
+            //SceneManager.LoadScene(SceneLoader.targetSceneIndex);
         }
     }
 
 
     public void LoadInGameData()
     {
-        if (!File.Exists(Application.dataPath + "/Saves/saveFile.sav")) { return; }
+        if (!File.Exists(SaveFilePath)) { return; }
         else
         {
-            string json = File.ReadAllText(Application.dataPath + "/Saves/saveFile.sav");
+            string json = File.ReadAllText(SaveFilePath);
 
             MainSaveObjectClass saveLoadSystem = JsonUtility.FromJson<MainSaveObjectClass>(json);
 

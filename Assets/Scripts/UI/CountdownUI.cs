@@ -62,7 +62,6 @@ public class CountdownUI : MonoBehaviour
         {
             gameStateManager.state = GameStateManager.State.Playing;
             gameStateManager.ToggleGameState();
-            Debug.Log("After Countdown end , TimeScale : " + Time.timeScale);
 
             uiManager.EnableInGameUI();
             Hide();

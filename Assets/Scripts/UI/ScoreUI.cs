@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.UI;
 
 
 
@@ -33,26 +32,27 @@ public class ScoreUI : MonoBehaviour
 
     private void Start()
     {
-        Image image = scoreUITemplate.GetComponentInChildren<Image>();
-        scoreBarFixedHeight = image.rectTransform.sizeDelta.y;
-        if (image != null) rankTransform.sizeDelta = new Vector2(rankTransform.sizeDelta.x, GameplayManager.Instance.GetHordeFormation().Count * (scoreBarFixedHeight + scoreTemplateSpacing));
+        ScoreBarUI baseTemplateScoreBarUI = scoreUITemplate.GetComponent<ScoreBarUI>();
+        scoreBarFixedHeight = baseTemplateScoreBarUI.scoreBar.rectTransform.sizeDelta.y;
+        if (baseTemplateScoreBarUI != null) rankTransform.sizeDelta = new Vector2(rankTransform.sizeDelta.x, GameplayManager.Instance.GetHordeFormation().Count * (scoreBarFixedHeight + scoreTemplateSpacing));
 
         foreach (HordeFormation hordeFormation in GameplayManager.Instance.GetHordeFormation())
         {
-            Transform scoreUITemplateTransform = Instantiate(scoreUITemplate, transform).transform;
-            scoreUITemplateTransform.gameObject.SetActive(true);
+            ScoreBarUI scoreBarUI = Instantiate(scoreUITemplate, transform).GetComponent<ScoreBarUI>();
+            scoreBarUI.hordeFormation = hordeFormation;
+            scoreBarUI.gameObject.SetActive(true);
 
-            TextMeshProUGUI scoreText = scoreUITemplateTransform.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI scoreText = scoreBarUI.GetComponentInChildren<TextMeshProUGUI>();
             scoreTextList.Add(scoreText);
 
-            image = scoreUITemplateTransform.GetComponentInChildren<Image>();
-            scoreBarTransformList.Add(image.rectTransform);
-            image.color = GameplayManager.Instance.GetUnitMaterial(hordeFormation).color;
+            scoreBarTransformList.Add(scoreBarUI.scoreBar.rectTransform);
+            scoreBarUI.scoreBar.color = GameplayManager.Instance.GetUnitMaterial(hordeFormation).color;
         }
 
         GameplayManager.Instance.OnScoreUpdated += UpdateUIScore;
         GameplayManager.Instance.OnScoreUpdated += UpdateUIScoreBar;
     }
+
 
 
 
@@ -65,7 +65,7 @@ public class ScoreUI : MonoBehaviour
     }
     private void UpdateUIScoreBar(List<float> scoreList)
     {
-        for(int i = 0; i < scoreBarTransformList.Count; i++)
+        for (int i = 0; i < scoreBarTransformList.Count; i++)
         {
             if (scoreList[i] > highestScore) highestScore = scoreList[i];
             scoreBarDisplayWidthMax = highestScore + 100f;

@@ -32,7 +32,7 @@ public class UnitSelector : MonoBehaviour
 
     private void UnitTemplateUI_OnTemplateUpdated(object sender, UnitTemplateUI.OnTemplateUpdatedEventArgs e)
     {
-        selectedUnitKey = e.unitTemplateUI.unitTemplateSO.unitKey;
+        selectedUnitKey = e.unitTemplateUI.GetUnitTemplateSO().unitKey;
         SaveSystem.Instance.SaveData();
 
         GameplayManager.Instance.playerHorde.ClearUnitsList(); //Units are dequeued in the beginning to spawn in the horde, so they must be cleared out too.

@@ -55,8 +55,8 @@ public class Unit : MonoBehaviour
     private float crestHP = 3f;
 
     //Linear Velocity
-    private float crestMoveSpeed = 8f;
-    private float troughMoveSpeed = 5f;
+    private float crestMoveSpeed = 6f;
+    private float troughMoveSpeed = 4f;
     private float currentMoveSpeed;
     private float movementThreshold = 0.05f;
 
@@ -188,6 +188,8 @@ public class Unit : MonoBehaviour
     //Solution #1
     // => find the way with vectors instead of rigid axes.
     public bool isFighting = false;
+    private float teleportationStartTime = 8f;
+    private float elapsedTimeForTeleportation = 0f;
     private void IndependentMovementHandlerRemake()
     {
         if (isFighting) return;
@@ -206,6 +208,7 @@ public class Unit : MonoBehaviour
             if (canMove)
             {
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * currentMoveSpeed);
+                capsuleCollider.enabled = true;
             }
             //Only if the way is not clear;
             else
@@ -222,6 +225,14 @@ public class Unit : MonoBehaviour
                 && !Physics.CapsuleCast(p1, p2, radius - 0.2f, leftToNormal, castDistance, baseController.GetInteractableLayers(), QueryTriggerInteraction.Ignore))
                 {
                     transform.position = Vector3.MoveTowards(transform.position, transform.position + leftToNormal, Time.deltaTime * currentMoveSpeed);
+                }
+                else
+                {
+                    elapsedTimeForTeleportation += Time.deltaTime;
+                    if (elapsedTimeForTeleportation < teleportationStartTime) return;
+                    elapsedTimeForTeleportation = 0f;
+
+                    capsuleCollider.enabled = false;
                 }
             }
         }
@@ -259,8 +270,8 @@ public class Unit : MonoBehaviour
 
 
 
-    private float hitCooldownTime = 1.5f;
-    private float hitElapsedTime = 1.5f;
+    private float hitCooldownTime = 0.5f;
+    private float hitElapsedTime = 0.5f;
     private void FightAtSight()
     {
 
@@ -284,6 +295,7 @@ public class Unit : MonoBehaviour
         hitElapsedTime = 0f;
 
         unit.TakeDamage(damageAmount);
+        if(hordeFormation == GameplayManager.Instance.playerHorde) AudioManager.Instance.PlaySwordClashSound();
     }
 
     //private void FightOnlyAtSight()

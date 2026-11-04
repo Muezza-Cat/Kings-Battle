@@ -48,10 +48,14 @@ public class MainMenuUI : MonoBehaviour
         playButton.onClick.AddListener(() => 
         {
             gameStateManager.state = GameStateManager.State.TouchToStart;
-            OnPlayButtonPressed();
 
             touchInputSystem.Touch.Touch.started += OnTapToPlay; //For TouchInput;
             touchInputSystem.Enable();
+
+            OnPlayButtonPressed();
+
+
+            //AdsManager.Instance.ShowInterstitialAd();
         });
         quitButton.onClick.AddListener(() => 
         {
@@ -80,7 +84,6 @@ public class MainMenuUI : MonoBehaviour
         uiManager.DisableMainMenuUIContainer();
 
         //uiManager.TogglePauseAndSettingsButton();
-        Debug.Log("Time.timeScale : " + Time.timeScale);
     }
 
     public void OnTapToPlay(InputAction.CallbackContext context)

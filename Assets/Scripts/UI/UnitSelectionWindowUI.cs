@@ -19,8 +19,11 @@ public class UnitSelectionWindowUI : MonoBehaviour
 
 
     [Header("Reference")]
-    [SerializeField] private UnitTemplateUI baseUnitTemplateUI; //Must have one default;
+    public UnitTemplateListSO unitTemplateListSO;
+
+    [SerializeField] private GameObject baseUnitTemplateUI; //Must have one default;
     [SerializeField] private Transform unitSelectionWindowUITransform;
+    [SerializeField] private Transform unitTemplateUIParent;
     public Sprite selectedButtonImage;
     public Sprite unselectedButtonImage;
 
@@ -44,7 +47,7 @@ public class UnitSelectionWindowUI : MonoBehaviour
         Instance = this;
         unitTemplateList = new List<UnitTemplateUI>();
 
-        foreach (Transform child in transform)
+        /*foreach (Transform child in transform)
         {
             if (child == baseUnitTemplateUI.transform) continue;
 
@@ -52,8 +55,22 @@ public class UnitSelectionWindowUI : MonoBehaviour
             unitTemplateList.Add(unitTemplateUI);
 
             unitTemplateUI.OnTemplateUpdated += UnitTemplateUI_OnTemplateUpdated;
-        }
+        }*/
 
+
+
+        foreach (TemplateDataSO templateDataSO in unitTemplateListSO.templateDataSOList)
+        {
+            GameObject unitTemplateUIGameObject = Instantiate(baseUnitTemplateUI, unitTemplateUIParent);
+            unitTemplateUIGameObject.gameObject.SetActive(true);
+
+            UnitTemplateUI unitTemplateUI = unitTemplateUIGameObject.GetComponent<UnitTemplateUI>();
+            unitTemplateUI.Initialize(templateDataSO);
+
+            unitTemplateList.Add(unitTemplateUI);
+
+            unitTemplateUI.OnTemplateUpdated += UnitTemplateUI_OnTemplateUpdated;
+        }
     }
 
 
@@ -111,6 +128,8 @@ public class UnitSelectionWindowUI : MonoBehaviour
             Debug.LogWarning("Invalid unitTemplateIndex");
             return;
         }
+
+        selectedUnitTemplateIndex = saveObject.unitTemplateIndex;
 
         unitTemplateList[saveObject.unitTemplateIndex].DisplayAsSelected();
         unitTemplateList[saveObject.unitTemplateIndex].isSelected = true;

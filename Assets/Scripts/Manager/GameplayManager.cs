@@ -29,6 +29,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private List<HordeData> hordeHomeList;
     [SerializeField] private List<Transform> flagList;
     private List<HordeFormation> hordeFormations;
+    private List<HordeFormation> aliveHordeFormations;
     public float remainingHordeCount;
     private List<float> hordeScore;
     private List<int> playerLives; //Each player i.e. hordes, have 4 lives before perma- dead;
@@ -39,7 +40,6 @@ public class GameplayManager : MonoBehaviour
 
 
     [Header("Settings")]
-    [SerializeField] private TextMeshProUGUI winnerText;
     [SerializeField] private int Lives = 4;
 
     [Header("Score")]
@@ -56,6 +56,7 @@ public class GameplayManager : MonoBehaviour
 
 
         hordeFormations = new List<HordeFormation>();
+        aliveHordeFormations = new List<HordeFormation>();
         playerLives = new List<int>();
         hordeScore = new List<float>();
 
@@ -64,6 +65,7 @@ public class GameplayManager : MonoBehaviour
         {
             HordeFormation hordeFormation = hordeHome.hordeFormation;
             hordeFormations.Add(hordeFormation);
+            aliveHordeFormations.Add(hordeFormation);
             playerLives.Add(Lives);
             hordeScore.Add(hordeFormation.score);
 
@@ -166,6 +168,7 @@ public class GameplayManager : MonoBehaviour
 
     private void PlayerLivesCounterRemake(HordeFormation hordeFormation)
     {
+
         if (hordeFormation.GetUnitCount() != 0)
         {
             return;
@@ -176,6 +179,7 @@ public class GameplayManager : MonoBehaviour
             Debug.Log(hordeFormation.name + "'s index : " + index);
             playerLives[index]--;
 
+
             if (playerLives[index] != 0)
             {
                 hordeFormation.gameObject.transform.position = GetHomeTransform(hordeFormation).position;
@@ -183,12 +187,15 @@ public class GameplayManager : MonoBehaviour
             }
             else
             {
+                if (hordeFormation == playerHorde) GameStateManager.Instance.state = GameStateManager.State.Over;
+                
                 hordeFormation.gameObject.SetActive(false);
-                hordeFormation.gameObject.transform.position = GetHomeTransform(hordeFormation).position;
-
+                aliveHordeFormations.Remove(hordeFormation);
                 hordeFormation.UpdatePlayerLives -= PlayerLivesCounterRemake;
             }
         }
+
+        if (IsPlayerTheOnlySurviver()) GameStateManager.Instance.state = GameStateManager.State.Over;
     }
 
 
@@ -238,6 +245,12 @@ public class GameplayManager : MonoBehaviour
     {
         return flagList;
     }
+
+    public bool IsPlayerTheOnlySurviver()
+    {
+        return (aliveHordeFormations.Count == 1 && aliveHordeFormations[0] == playerHorde);
+    }
+
 
 
 

@@ -75,7 +75,6 @@ public class EnemyController : BaseController
 
     public void Update()
     {
-
         updateMethodElapsedTime += Time.deltaTime;
         if (updateMethodElapsedTime < updateMethodCooldownTime) return;
         updateMethodElapsedTime = 0f;

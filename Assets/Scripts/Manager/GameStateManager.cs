@@ -21,6 +21,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private float gameplayTimeMax = 6f;
     private float gameplayElapsedTime = 0f;
 
+    public bool isPlayerTheWinner = false;
 
 
 
@@ -37,7 +38,7 @@ public class GameStateManager : MonoBehaviour
 
 
     [Header("Flags")]
-    [HideInInspector] public bool gamePaused = true;
+    public bool gamePaused = true;
     [HideInInspector] public bool isGameOver = false;
 
 
@@ -52,7 +53,9 @@ public class GameStateManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Before Toggle In GameStateManager : " + Time.timeScale);
         ToggleGameState();
+        Debug.Log("After Toggle In GameStateManager : " + Time.timeScale);
     }
 
 
@@ -101,6 +104,11 @@ public class GameStateManager : MonoBehaviour
     public bool IsCountdownToStartActive()
     {
         return state == State.StartCountdown;
+    }
+
+    public bool IsPlayerTheWinner()
+    {
+        return isPlayerTheWinner;
     }
 
 

@@ -20,7 +20,7 @@ public class UnitTemplateUI : MonoBehaviour
 
 
     [Header("Reference")]
-    public UnitTemplateSO unitTemplateSO;
+    private UnitTemplateSO unitTemplateSO;
     private UnitSelectionWindowUI unitSelectionWindowUI;
 
 
@@ -32,12 +32,11 @@ public class UnitTemplateUI : MonoBehaviour
 
 
     [Header("Settings")]
-    public string UNIT_NAME;
     private const string SELECTED = "Selected";
     private const string SELECT = "Select";
 
-    private float bgDefaultAlphaValue = 130f / 255f; //Color uses a normalized value, i.e, 0f - 1f;
-    private float bgSelectedAlphaValue = 1f;
+    private const float bgDefaultAlphaValue = 130f / 255f; //Color uses a normalized value, i.e, 0f - 1f;
+    private const float bgSelectedAlphaValue = 1f;
 
     public bool isSelected = false;
 
@@ -47,9 +46,18 @@ public class UnitTemplateUI : MonoBehaviour
     {
         unitSelectionWindowUI = GetComponentInParent<UnitSelectionWindowUI>();
         selectionButtonText = selectionButton.GetComponentInChildren<TextMeshProUGUI>();
-
-        unitNameText.text = UNIT_NAME;
     }
+
+
+
+    public void Initialize(TemplateDataSO templateDataSO)
+    {
+        unitTemplateSO = templateDataSO.unitTemplateSO;
+        //unitImage.sprite = templateDataSO.unitSprite;
+        unitNameText.text = templateDataSO.UNIT_NAME;
+    }
+
+
 
 
     private void Start()
@@ -90,5 +98,12 @@ public class UnitTemplateUI : MonoBehaviour
         Color color = backgroundImage.color;
         color.a = bgDefaultAlphaValue;
         backgroundImage.color = color;
+    }
+
+
+
+    public UnitTemplateSO GetUnitTemplateSO()
+    {
+        return unitTemplateSO;
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 public class HordeFormation : MonoBehaviour
@@ -10,6 +9,7 @@ public class HordeFormation : MonoBehaviour
     #region Event
     public event Action<int, HordeFormation> OnDisableUpdateEnemyLayer;
     public event Action<HordeFormation> UpdatePlayerLives;
+    public event Action<int> UpdateCoinCountUI;
     #endregion
 
 
@@ -51,7 +51,6 @@ public class HordeFormation : MonoBehaviour
     private List<Flag> occupiedFlags;
 
     public float score { get; set; }
-    [SerializeField] private TextMeshProUGUI scoreText;
 
 
     private enum KingLocation
@@ -84,6 +83,8 @@ public class HordeFormation : MonoBehaviour
 
     private void Start()
     {
+        UpdateCoinCountUI?.Invoke(coins);
+
         AddStartingUnits(points);
     }
 
@@ -93,7 +94,6 @@ public class HordeFormation : MonoBehaviour
         AssignUnitPosition();
 
         UpdateHordeSpeed();
-        if (scoreText != null) scoreText.text = Mathf.FloorToInt(score).ToString();
     }
 
     private void OnDisable()
@@ -103,11 +103,11 @@ public class HordeFormation : MonoBehaviour
 
 
     //Unit position specification;
+    private int totalIterationsRequired = 26; //Including the king's position;
     private void EvaluatePoints(bool kingInCenter)
     {
         float zPosMultiplier = (kingInCenter) ? 1f : -1f;
         if (kingInCenter) numberOfRows++;
-
 
         for (float z = 1; z <= numberOfRows; z++)
         {
@@ -125,6 +125,8 @@ public class HordeFormation : MonoBehaviour
 
             for (float x = 0; x < numberOfColumns; x++)
             {
+                if (points.Count >= totalIterationsRequired) return;
+
                 float xPos;
                 xPos = x;
                 if (x > halfOfHordeWidth)
@@ -209,12 +211,22 @@ public class HordeFormation : MonoBehaviour
     public bool isNearAFlag = false;
     public void AddUnit()
     {
+        if ((GameplayManager.Instance.GetHomeTransform(this).position - transform.position).sqrMagnitude < 10f * 10f)
+        {
+            if (RemoveCoin(perUnitCost))
+            {
+                AddUnitForFree(GameplayManager.Instance.GetHomeTransform(this));
+                UpdatePlayerLives?.Invoke(this);
+                return;
+            }
+        }
+
         if (!IsFlagNearby()) return;
         if (units.Count < points.Count && isNearAFlag)
         {
             if (RemoveCoin(perUnitCost))
             {
-                if(nearestFlag != null) AddUnitForFree(nearestFlag.transform);
+                if (nearestFlag != null) AddUnitForFree(nearestFlag.transform);
                 UpdatePlayerLives?.Invoke(this);
             }
         }
@@ -225,7 +237,7 @@ public class HordeFormation : MonoBehaviour
     {
         units.Remove(unit);
         //unit.gameObject.layer = 0;
-        ObjectPooler.Instance.DespawnUnit(unit.gameObject);
+        ObjectPooler.Instance.DespawnUnit(unit.gameObject, this);
         UpdatePlayerLives?.Invoke(this);
         //if (this.TryGetComponent<PlayerController>(out PlayerController controller)) Debug.Log("Removed Unit : " + units.Count);
     }
@@ -283,6 +295,7 @@ public class HordeFormation : MonoBehaviour
     public void AddCoin(int amount)
     {
         coins += amount;
+        UpdateCoinCountUI?.Invoke(coins);
 
         coinsAllTime += amount;
         score += amount / 3f;
@@ -293,6 +306,7 @@ public class HordeFormation : MonoBehaviour
         if (coins >= amount)
         {
             coins -= amount;
+            UpdateCoinCountUI?.Invoke(coins);
             removedCoin = true;
         }
         else
@@ -342,7 +356,7 @@ public class HordeFormation : MonoBehaviour
 
     public int appleCount = 0;
     private bool isOnSpeedup;
-    private float speedupMoveSpeed = 10f;
+    private float speedupMoveSpeed = 6f;
 
     private float speedupTimeMax = 3f;
     private float speedupElapsedTime = 0f;

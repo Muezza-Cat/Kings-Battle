@@ -7,7 +7,6 @@ public class PlayerController : BaseController
     [Header("Reference")]
     private CharacterController controller;
     [HideInInspector] public HordeFormation hordeFormation;
-    [SerializeField] private TextMeshProUGUI coinsAmountText;
     private Animator animator;
 
     [Header("Movement")]
@@ -46,8 +45,6 @@ public class PlayerController : BaseController
     {
         MovementHandler();
         RotationHandler();
-
-        if (coinsAmountText != null) coinsAmountText.text = hordeFormation.coins.ToString();
     }
 
 

@@ -21,6 +21,10 @@ public static class SceneLoader
 
     public static void LoadScene(/*Scene targetScene*/int index)
     {
+        if (index > SceneManager.sceneCountInBuildSettings - 1)
+        {
+            index = 1;
+        }
         //SceneLoader.targetScene = targetScene;
         targetSceneIndex = index;
         SceneManager.LoadScene(/*SceneLoader.Scene.LoadingScene.ToString()*/ 0);

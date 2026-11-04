@@ -26,7 +26,7 @@ public class ObjectPooler : MonoBehaviour
 
     [Header("Settings")]
     private int numberOfHordes;
-    [SerializeField] private int maxUnitCapacityInHorde = 25;
+    public int maxUnitCapacityInHorde = 25;
     private int numOfEnemyUnitsToPool;
     private int numOfPlayerUnitsToPool;
 
@@ -48,6 +48,7 @@ public class ObjectPooler : MonoBehaviour
     {
         Man,
         Woman,
+        Child,
     }
 
 
@@ -56,9 +57,10 @@ public class ObjectPooler : MonoBehaviour
     {
         foreach (UnitTemplateUI unitTemplateUI in UnitSelectionWindowUI.Instance.GetUnitTemplateList())
         {
-            if (unitTemplateUI.unitTemplateSO.unitKey == unitKey)
+            if (unitTemplateUI.GetUnitTemplateSO().unitKey == unitKey)
             {
-                return unitTemplateUI.unitTemplateSO.unitPrefab;
+                Debug.Log(unitTemplateUI.GetUnitTemplateSO().unitPrefab);
+                return unitTemplateUI.GetUnitTemplateSO().unitPrefab;
             }
         }
         return null;
@@ -206,14 +208,14 @@ public class ObjectPooler : MonoBehaviour
         return unitToSpawn;
     }
 
-    public void DespawnUnit(GameObject unitToEnqueue)
+    public void DespawnUnit(GameObject unitToEnqueue, HordeFormation hordeFormation)
     {
         unitToEnqueue.transform.position = Vector3.zero;
         unitToEnqueue.transform.rotation = Quaternion.identity;
 
         unitToEnqueue.SetActive(false);
 
-        bigPool[PoolKey.Unit].Enqueue(unitToEnqueue);
+        bigPool[hordeFormation.GetBaseController().poolKey].Enqueue(unitToEnqueue);
     }
 
     public void SpawnCoin(Vector3 spawnPosition, Quaternion spawnRotation)
@@ -300,6 +302,7 @@ public class ObjectPooler : MonoBehaviour
 
     public void Load(SaveObject saveObject)
     {
+        UnitSelector.Instance.selectedUnitKey = saveObject.unitKey;
         playerUnitPrefab = GetUnitPrefab(saveObject.unitKey);
     }
 }

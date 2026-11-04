@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d952d70647c3e3944ab7b60c777dba53, type: 3}
+  m_Name: AudioClipSO
+  m_EditorClassIdentifier: Assembly-CSharp::AudioClipSO
+  buttonClick: {fileID: 0}
+  swordClash: {fileID: 8300000, guid: 81d869ac43f93d046842642ec23eaf65, type: 3}
+  desertAmbience: {fileID: 8300000, guid: f1ba3a32f221bdc46b44b8c5ab329b63, type: 3}
+  normalAmbience: {fileID: 8300000, guid: 2facd0b97c5018f4181c4ee8ef9316ef, type: 3}
+  medievalAmbience: {fileID: 8300000, guid: 3bf91ef6fec2cfa4db41e9f490678e8b, type: 3}

@@ -43,12 +43,12 @@ public class GameOverResultUI : MonoBehaviour
     [Header("Settings")]
     private float scoreBarWidthMax = 500f;
     float highestScore;
-    HordeFormation highestScoringHorde;
+    private HordeFormation highestScoringHorde;
 
 
     [Header("Collection")]
-    List<float> sortedScoreList;
-    List<HordeFormation> sortedHordeByScore;
+    private List<float> sortedScoreList;
+    private List<HordeFormation> sortedHordeByScore;
 
     [Header("String")]
     private string LOSE = "Defeat";
@@ -102,29 +102,19 @@ public class GameOverResultUI : MonoBehaviour
     private void GameStateManager_OnStateChanged()
     {
         //if (gameStateManager.IsCountdownToStartActive() || gameStateManager.state == GameStateManager.State.MainMenu || gameStateManager.state == GameStateManager.State.TouchToStart) return;
-        if (gameStateManager.IsGameOver())
+        if (gameplayManager.GetPlayerRemainingLives(playerHorde) == 0) //If player dead;
         {
-            //Debug.Log("Ran GameOver condition");
+            GameStateManager.Instance.isPlayerTheWinner = false;
 
             UIManager.Instance.EnableGameOverWindowUI();
-
             CalculateFinalScore(GetDeadHordeList());
             DisplayFinalScores();
 
-            gameStateManager.ToggleGameState();
-        }
-        else if (gameplayManager.GetPlayerRemainingLives(playerHorde) == 0) //If player dead;
-        {
-            Debug.Log("Ran Player eliminated condition");
-
-            UIManager.Instance.EnableGameOverWindowUI();
-
-            CalculateFinalScore(GetDeadHordeList());
-            DisplayFinalScores();
+            ShowDefeatTemplate();
 
             gameStateManager.ToggleGameState();
         }
-        else if (gameplayManager.remainingHordeCount == 1 && gameplayManager.GetPlayerRemainingLives(playerHorde) > 0)
+        else if (gameplayManager.IsPlayerTheOnlySurviver())
         {
             Debug.Log("Ran only player remaining condition");
 
@@ -133,7 +123,32 @@ public class GameOverResultUI : MonoBehaviour
             CalculateFinalScore(GetDeadHordeList());
             DisplayFinalScores();
 
+            ShowVictoryTemplate();
+            GameStateManager.Instance.isPlayerTheWinner = true;
+
             gameStateManager.ToggleGameState();
+        }
+        else if (gameStateManager.IsGameOver())
+        {
+            UIManager.Instance.EnableGameOverWindowUI();
+
+            CalculateFinalScore(GetDeadHordeList());
+            DisplayFinalScores();
+
+            if (winnerHorde == playerHorde)
+            {
+                GameStateManager.Instance.isPlayerTheWinner = true;
+                ShowVictoryTemplate();
+            }
+            else
+            {
+                GameStateManager.Instance.isPlayerTheWinner = false;
+                ShowDefeatTemplate();
+            }
+
+            Debug.Log("Before GameOver TimeScale : " + Time.timeScale);
+            gameStateManager.ToggleGameState();
+            Debug.Log("After GameOver TimeScale : " + Time.timeScale);
         }
     }
 
@@ -213,32 +228,44 @@ public class GameOverResultUI : MonoBehaviour
             scoreUITemplate.scoreBar.color = gameplayManager.GetUnitMaterial(sortedHordeByScore[i]).color;
         }
 
+        /*
         if (winnerHorde == playerHorde)
         {
-            resultImage.sprite = victorySprite;
-            resultText.text = WIN;
-            resultText.color = Color.white;
-            stars.SetActive(true);
-            obtainedRankText.text = "Your Rank : #1";
-            winnerText.text = "Winner : " + winnerHorde.name;
-
-            winnerText.color = gameplayManager.GetUnitMaterial(winnerHorde).color;
-
-            HideUIButton(new Button[] { nextButton, restartButton, quitButton }); //Just for formality;
-            ShowUIButton(new Button[] { nextButton, restartButton, quitButton });
+            ShowVictoryTemplate();
         }
         else
         {
-            resultImage.sprite = defeatSprite;
-            resultText.text = LOSE;
-            resultText.color = Color.red;
-            stars.SetActive(false);
-            obtainedRankText.text = "Your Rank : #" + (sortedHordeByScore.IndexOf(playerHorde) + 1).ToString();
-            winnerText.text = winnerHorde.name;
+            ShowDefeatTemplate();
+        }*/
+    }
 
-            HideUIButton(new Button[] { nextButton, restartButton, quitButton });
-            ShowUIButton(new Button[] {quitButton, restartButton});
-        }
+
+    private void ShowVictoryTemplate()
+    {
+        resultImage.sprite = victorySprite;
+        resultText.text = WIN;
+        resultText.color = Color.white;
+        stars.SetActive(true);
+        obtainedRankText.text = "Your Rank : #1";
+        winnerText.text = "Winner : " + winnerHorde.name;
+
+        winnerText.color = gameplayManager.GetUnitMaterial(winnerHorde).color;
+
+        HideUIButton(new Button[] { nextButton, restartButton, quitButton }); //Just for formality;
+        ShowUIButton(new Button[] { nextButton, restartButton, quitButton });
+    }
+
+    private void ShowDefeatTemplate()
+    {
+        resultImage.sprite = defeatSprite;
+        resultText.text = LOSE;
+        resultText.color = Color.red;
+        stars.SetActive(false);
+        obtainedRankText.text = "Your Rank : #" + (sortedHordeByScore.IndexOf(playerHorde) + 1).ToString();
+        winnerText.text = winnerHorde.name;
+
+        HideUIButton(new Button[] { nextButton, restartButton, quitButton });
+        ShowUIButton(new Button[] { quitButton, restartButton });
     }
    
 
@@ -261,18 +288,6 @@ public class GameOverResultUI : MonoBehaviour
     }
 
 
-
-    private void OnRestartLevel()
-    {
-        SceneLoader.ReloadSceneAsRestartGame();
-
-        //if (UIManager.Instance == null) Debug.LogWarning("Null reference of UIManager's Object");
-        //UIManager.Instance.DisableMainMenuUIContainer();
-
-        //touchInputSystem.Enable();
-        //touchInputSystem.Touch.Touch.started += Touch_started;
-        //UIManager.Instance.EnableTouchToStartUI();
-    }
 
     private void Touch_started(InputAction.CallbackContext obj)
     {

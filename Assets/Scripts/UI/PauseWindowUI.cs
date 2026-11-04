@@ -39,7 +39,12 @@ public class PauseWindowUI : MonoBehaviour
         });
         restartButton.onClick.AddListener(() =>
         {
+            // <Testing>
+            GameStateManager.Instance.ToggleGameState();
+            // </Testing>
+
             SceneLoader.ReloadSceneAsRestartGame();
+
         });
 
         UIManager.Instance.DisablePauseWindow();
