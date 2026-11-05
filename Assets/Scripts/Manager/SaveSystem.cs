@@ -16,12 +16,12 @@ public class SaveSystem : MonoBehaviour
 
 
 
-    private static string SaveDirectoryPath => Path.Combine(Application.persistentDataPath, "Saves");
-    private static string SaveFilePath => Path.Combine(SaveDirectoryPath, "saveFile.sav");
+    private static string SavesDirectoryPath => Path.Combine(Application.persistentDataPath, "Saves");
+    private static string SaveFilePath => Path.Combine(SavesDirectoryPath, "saveFile.sav");
 
-    private static void EnsureSaveDirectory()
+    private static void EnsureSaveDirectoryExists()
     {
-        Directory.CreateDirectory(SaveDirectoryPath);
+        Directory.CreateDirectory(SavesDirectoryPath);
     }
 
 
@@ -62,7 +62,7 @@ public class SaveSystem : MonoBehaviour
     // - Saving when a game is completed (not done)
     public void SaveData()
     {
-        EnsureSaveDirectory();
+        EnsureSaveDirectoryExists();
 
         Debug.Log("Saved Data");
         if (GameplayManager.Instance == null)

@@ -9828,15 +9828,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5127949886369162122, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
       propertyPath: minutes
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5127949886369162122, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
       propertyPath: seconds
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5127949886369162122, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
       propertyPath: timeRemaining
-      value: 30
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 5750523778250785327, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
       propertyPath: m_AnchorMax.y

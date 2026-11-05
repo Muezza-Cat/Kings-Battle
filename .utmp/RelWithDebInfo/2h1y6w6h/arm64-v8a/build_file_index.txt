@@ -1,0 +1,2 @@
+D:\Game_Projects_Basic\unityprojects_Basic\Kings Battle\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+D:\Game_Projects_Basic\unityprojects_Basic\Kings Battle\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

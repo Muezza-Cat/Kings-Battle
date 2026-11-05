@@ -82,10 +82,12 @@ public class GameOverResultUI : MonoBehaviour
 
         nextButton.onClick.AddListener(() =>
         {
+            AdsManager.Instance.ShowInterstitialAd();
             SceneLoader.LoadScene(/*(SceneLoader.Scene) SceneManager.GetActiveScene().buildIndex*/ SceneManager.GetActiveScene().buildIndex + 1);
         });
         restartButton.onClick.AddListener(() =>
         {
+            AdsManager.Instance.ShowInterstitialAd();
             SceneLoader.ReloadSceneAsRestartGame();
             //OnRestartLevel();
         });

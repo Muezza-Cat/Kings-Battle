@@ -58,16 +58,20 @@ public class AdsManager : MonoBehaviour
     {
         successfullyInitialized = true;
 
+        //Create Ad Objects;
         CreateInterstitialAdUnit();
         CreateRewardedAdUnit();
 
+
+        //Load Ads before displaying them;
         interstitialAd.LoadAd();
         rewardedAd.LoadAd();
     }
 
     private void LevelPlay_OnInitFailed(LevelPlayInitError obj)
     {
-        //Debug.LogError("LevelPlay Initialization Failed!");
+        successfullyInitialized = false;
+        Debug.LogError("LevelPlay Initialization Failed!");
     }
 
 
@@ -82,29 +86,29 @@ public class AdsManager : MonoBehaviour
         interstitialAd.OnAdClosed += InterstitialAd_OnAdClosed;
     }
 
-    private void InterstitialAd_OnAdClosed(LevelPlayAdInfo obj)
-    {
-        interstitialAd.LoadAd();
-    }
 
     private void InterstitialAd_OnAdLoaded(LevelPlayAdInfo obj)
     {
-        //Debug.Log("The Interstitial Ad was loaded");
+        Debug.Log("The Interstitial Ad was loaded");
     }
     private void InterstitialAd_OnAdLoadFailed(LevelPlayAdError obj)
     {
-        //Debug.Log("The Interstitial Ad was NOT loaded");
-        interstitialAd.LoadAd();
+        Debug.Log("The Interstitial Ad was NOT loaded");
+        interstitialAd.LoadAd(); //Try load again.
+    }
+    private void InterstitialAd_OnAdClosed(LevelPlayAdInfo obj)
+    {
+        interstitialAd.LoadAd(); //load another ad;
     }
 
-    private bool IsInterstitialAdReady()
+    private bool IsInterstitialAdLoaded()
     {
         return successfullyInitialized && interstitialAd != null && interstitialAd.IsAdReady();
     }
 
     public void ShowInterstitialAd()
     {
-        if (!IsInterstitialAdReady()) return;
+        if (!IsInterstitialAdLoaded()) return;
 
         interstitialAd.ShowAd();
     }
@@ -124,11 +128,11 @@ public class AdsManager : MonoBehaviour
 
     private void RewardedAd_OnAdLoaded(LevelPlayAdInfo obj)
     {
-        //Debug.Log("Rewarded Ad was Loaded");
+        Debug.Log("Rewarded Ad was Loaded");
     }
     private void RewardedAd_OnAdLoadFailed(LevelPlayAdError obj)
     {
-        //Debug.Log("Rewarded Ad was NOT Loaded");
+        Debug.Log("Rewarded Ad was NOT Loaded");
         rewardedAd.LoadAd();
     }
 
@@ -140,19 +144,20 @@ public class AdsManager : MonoBehaviour
 
     private void RewardedAd_OnAdClosed(LevelPlayAdInfo obj)
     {
+        //Closed in between;
         rewardedAd.LoadAd();
     }
 
 
 
-    private bool IsRewardedAdReady()
+    private bool IsRewardedAdLoaded()
     {
         return successfullyInitialized && rewardedAd != null && rewardedAd.IsAdReady();
     }
 
     public void ShowRewardedAd(Action rewardCallback)
     {
-        if (!IsRewardedAdReady()) return;
+        if (!IsRewardedAdLoaded()) return;
 
         OnRewardedAdCompleted += rewardCallback;
         
@@ -166,5 +171,4 @@ public class AdsManager : MonoBehaviour
         LevelPlay.OnInitSuccess -= LevelPlay_OnInitSuccess;
         LevelPlay.OnInitFailed -= LevelPlay_OnInitFailed;
     }
-
 }
