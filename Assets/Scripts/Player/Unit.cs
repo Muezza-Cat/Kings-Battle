@@ -86,6 +86,8 @@ public class Unit : MonoBehaviour
     {
         CurrentHealth = UnityEngine.Random.Range(troughHP, crestHP);
         currentMoveSpeed = UnityEngine.Random.Range(troughMoveSpeed, crestMoveSpeed);
+
+        isFighting = false;
         //currentAngularVelocity = UnityEngine.Random.Range(troughAngularVelocity, crestAngularVelocity);
     }
 
@@ -96,9 +98,11 @@ public class Unit : MonoBehaviour
         this.hordeFormation = hordeFormation;
         baseController = hordeFormation.GetBaseController();
 
-        foreach(SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRendererList)
+        foreach (SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRendererList)
         {
             skinnedMeshRenderer.material = hordeFormation.unitMaterial;
+            //if (hordeFormation == GameplayManager.Instance.playerHorde)
+            //skinnedMeshRenderer.material = UnitSelectionWindowUI.Instance.GetUnitTemplateList()[UnitSelectionWindowUI.Instance.GetSelectedUnitTemplateIndex()].GetUnitTemplateSO().unitMaterial;
         }
     }
 
@@ -108,7 +112,7 @@ public class Unit : MonoBehaviour
     {
         //IsMoving();
         //FightOnlyAtSight();
-        FightAtSight();
+        FightAtSightChatGPTRemake();
 
         //IndependentMovementHandler();
         IndependentMovementHandlerRemake();
@@ -161,9 +165,9 @@ public class Unit : MonoBehaviour
     }*/
 
 
-    private float speedOffsetWithSpeedup = 8f;
+    private float speedOffsetWithSpeedup = 4f;
 
-    private float speedCalculationCooldownTime = 0.2f;
+    private float speedCalculationCooldownTime = 0.4f;
     private float speedCalculationElapsedTime = 0f;
     private void UnitSpeedCalculator()
     {
@@ -188,8 +192,8 @@ public class Unit : MonoBehaviour
     //Solution #1
     // => find the way with vectors instead of rigid axes.
     public bool isFighting = false;
-    private float teleportationStartTime = 8f;
-    private float elapsedTimeForTeleportation = 0f;
+    //private float teleportationStartTime = 2f;
+    //private float elapsedTimeForTeleportation = 0f;
     private void IndependentMovementHandlerRemake()
     {
         if (isFighting) return;
@@ -226,14 +230,14 @@ public class Unit : MonoBehaviour
                 {
                     transform.position = Vector3.MoveTowards(transform.position, transform.position + leftToNormal, Time.deltaTime * currentMoveSpeed);
                 }
-                else
+                /*else
                 {
                     elapsedTimeForTeleportation += Time.deltaTime;
                     if (elapsedTimeForTeleportation < teleportationStartTime) return;
                     elapsedTimeForTeleportation = 0f;
 
                     capsuleCollider.enabled = false;
-                }
+                }*/
             }
         }
     }
@@ -272,7 +276,58 @@ public class Unit : MonoBehaviour
 
     private float hitCooldownTime = 0.5f;
     private float hitElapsedTime = 0.5f;
-    private void FightAtSight()
+
+
+
+    private readonly Collider[] colliders = new Collider[4]; //buffer length 4;
+    private float enemyDetectionCooldownTime = 0.1f;
+    private float enemyDetectionElapsedTime = 0f;
+    private void FightAtSightChatGPTRemake()
+    {
+        enemyDetectionElapsedTime += Time.deltaTime;
+        hitElapsedTime += Time.deltaTime;
+        if (enemyDetectionElapsedTime < enemyDetectionCooldownTime) return;
+        enemyDetectionElapsedTime = 0f;
+
+
+        int nearbyEnemyCount = Physics.OverlapSphereNonAlloc(transform.position, attackRange, colliders, hordeFormation.enemyLayer, QueryTriggerInteraction.Ignore);
+
+        if (nearbyEnemyCount == 0)
+        {
+            isFighting = false;
+            return;
+        }
+
+        Unit enemyUnit = null;
+        for (int i = 0; i < nearbyEnemyCount; i++)
+        {
+            if (colliders[i].TryGetComponent<Unit>(out enemyUnit))
+            {
+                break;
+            }
+        }
+
+        if (enemyUnit == null)
+        {
+            isFighting = false;
+            return;
+        }
+        isFighting = true;
+
+        OnFightEvent?.Invoke(); //Animation player event;
+        //hitElapsedTime += Time.deltaTime;
+
+        Vector3 lookDirection = (enemyUnit.transform.position - transform.position).normalized;
+        if (lookDirection != Vector3.zero) transform.forward = lookDirection;
+
+        if (hitElapsedTime < hitCooldownTime) return;
+        hitElapsedTime = 0f;
+
+        enemyUnit.TakeDamage(damageAmount);
+        if (hordeFormation == GameplayManager.Instance.playerHorde) AudioManager.Instance.PlaySwordClashSound();
+    }
+
+    /*private void FightAtSight()
     {
 
         Collider[] collider = Physics.OverlapSphere(transform.position, attackRange, hordeFormation.enemyLayer, QueryTriggerInteraction.Ignore);
@@ -296,67 +351,67 @@ public class Unit : MonoBehaviour
 
         unit.TakeDamage(damageAmount);
         if(hordeFormation == GameplayManager.Instance.playerHorde) AudioManager.Instance.PlaySwordClashSound();
-    }
+    }*/
 
-    //private void FightOnlyAtSight()
-    //{
-    //    Collider[] collider = Physics.OverlapSphere(transform.position, attackRange, hordeFormation.enemyLayer, QueryTriggerInteraction.Ignore);
+    /*private void FightOnlyAtSight()
+    {
+        Collider[] collider = Physics.OverlapSphere(transform.position, attackRange, hordeFormation.enemyLayer, QueryTriggerInteraction.Ignore);
 
-    //    if (collider == null || collider.Length == 0) return;
+        if (collider == null || collider.Length == 0) return;
 
-    //    //First check the first unit is either already detected or not;
-    //    //If not;
-    //    Unit unit = collider[0].GetComponent<Unit>();
-    //    if (unit != null && !unit.isDetected)
-    //    {
-    //        unit.isDetected = true;
-    //        unit.TakeDamage(damageAmount);
+        //First check the first unit is either already detected or not;
+        //If not;
+        Unit unit = collider[0].GetComponent<Unit>();
+        if (unit != null && !unit.isDetected)
+        {
+            unit.isDetected = true;
+            unit.TakeDamage(damageAmount);
 
-    //        //Animation and Rotation
-    //        transform.rotation = Quaternion.LookRotation((unit.transform.position - transform.position).normalized);
-    //        OnFightEvent?.Invoke();
+            //Animation and Rotation
+            transform.rotation = Quaternion.LookRotation((unit.transform.position - transform.position).normalized);
+            OnFightEvent?.Invoke();
 
-    //        if (!isDetected)
-    //        {
-    //            TakeDamage(unit.damageAmount);
-    //            isDetected = false;
-    //        }
-    //        else
-    //        {
-    //            isDetected = false;
-    //        }
-    //    }
-    //    //If yes;
-    //    else
-    //    {
-    //        foreach (Collider enemyCollider in collider)
-    //        {
-    //            Unit otherUnit = enemyCollider.GetComponent<Unit>();
-    //            if (otherUnit == null) continue;
-    //            if (otherUnit.isDetected) continue;
-    //            else
-    //            {
-    //                otherUnit.isDetected = true;
-    //                otherUnit.TakeDamage(damageAmount);
+            if (!isDetected)
+            {
+                TakeDamage(unit.damageAmount);
+                isDetected = false;
+            }
+            else
+            {
+                isDetected = false;
+            }
+        }
+        //If yes;
+        else
+        {
+            foreach (Collider enemyCollider in collider)
+            {
+                Unit otherUnit = enemyCollider.GetComponent<Unit>();
+                if (otherUnit == null) continue;
+                if (otherUnit.isDetected) continue;
+                else
+                {
+                    otherUnit.isDetected = true;
+                    otherUnit.TakeDamage(damageAmount);
 
-    //                //Animation and Rotation
-    //                transform.rotation = Quaternion.LookRotation((otherUnit.transform.position - transform.position).normalized);
-    //                OnFightEvent?.Invoke();
+                    //Animation and Rotation
+                    transform.rotation = Quaternion.LookRotation((otherUnit.transform.position - transform.position).normalized);
+                    OnFightEvent?.Invoke();
 
-    //                if (!isDetected)
-    //                {
-    //                    TakeDamage(unit.damageAmount);
-    //                    isDetected = false;
-    //                    return;
-    //                }
-    //                else
-    //                {
-    //                    isDetected = false;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+                    if (!isDetected)
+                    {
+                        TakeDamage(unit.damageAmount);
+                        isDetected = false;
+                        return;
+                    }
+                    else
+                    {
+                        isDetected = false;
+                    }
+                }
+            }
+        }
+    }*/
 
 
     public void TakeDamage(float dmgAmt)

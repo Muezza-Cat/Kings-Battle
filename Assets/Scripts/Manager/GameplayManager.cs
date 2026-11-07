@@ -97,8 +97,14 @@ public class GameplayManager : MonoBehaviour
     }
 
 
+    private float calculateScoreCooldownTime = 0.1f;
+    private float calculateScoreElapsedTime = 0f;
     private void Update()
     {
+        calculateScoreElapsedTime += Time.deltaTime;
+        if (calculateScoreElapsedTime < calculateScoreCooldownTime) return;
+        calculateScoreElapsedTime = 0f;
+
         CalculateScore();
     }
 
@@ -113,7 +119,7 @@ public class GameplayManager : MonoBehaviour
 
             foreach (Flag flag in hordeFormation.GetOccupiedFlags())
             {
-                scoreByFlags += (flag.scorePerMinute * Time.deltaTime) / 60f; 
+                scoreByFlags += (flag.scorePerMinute * 0.1f) / 60f; 
             }
             hordeFormation.score += (scoreByFlags);
         }
@@ -253,7 +259,7 @@ public class GameplayManager : MonoBehaviour
 
 
 
-
+    #region SaveSystem
     [Serializable]
     public class SaveObject
     {
@@ -278,4 +284,5 @@ public class GameplayManager : MonoBehaviour
         int sceneIndex = saveObject.targetSceneIndex;
         SceneManager.LoadScene(/*(SceneLoader.Scene) */sceneIndex);
     }
+    #endregion
 }

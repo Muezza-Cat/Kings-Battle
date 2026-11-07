@@ -62,8 +62,15 @@ public class EnemyIndicator : MonoBehaviour
     private float indicatorOffsetInCorner = 100f;
     private float cornerAngleOffset = 10f;
     private float rightAngle = 90f;
+
+    private float indicatorDisplayCooldownTime = 0.1f;
+    private float indicatorDisplayElapsedTime = 0f;
     private void ShowIndicator()
     {
+        indicatorDisplayElapsedTime += Time.deltaTime;
+        if (indicatorDisplayElapsedTime < indicatorDisplayCooldownTime) return;
+        indicatorDisplayElapsedTime = 0f;
+
         if (targetCamera == null || indicatorPrefab == null || indicator == null) return;
 
         //Enemy WorldPosToScreenPos

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Unit#3
   m_EditorClassIdentifier: Assembly-CSharp::TemplateDataSO
   unitTemplateSO: {fileID: 11400000, guid: 17a0db8184d9a244096a52e34b618c7a, type: 2}
-  bgImage: {fileID: 0}
-  unitImage: {fileID: 0}
   unitSprite: {fileID: 0}
-  unitNameText: {fileID: 0}
-  selectionButton: {fileID: 0}
+  templateBGColor: {r: 0, g: 0, b: 0, a: 0}
   UNIT_NAME: Unit#3
+  unit_ID: tinu_3
+  adsToWatch: 3
+  isLocked: 1

@@ -41,9 +41,9 @@ public class UnitSelectionWindowUI : MonoBehaviour
 
 
 
-
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
         Instance = this;
         unitTemplateList = new List<UnitTemplateUI>();
 
@@ -57,15 +57,37 @@ public class UnitSelectionWindowUI : MonoBehaviour
             unitTemplateUI.OnTemplateUpdated += UnitTemplateUI_OnTemplateUpdated;
         }*/
 
-
-
         foreach (TemplateDataSO templateDataSO in unitTemplateListSO.templateDataSOList)
         {
             GameObject unitTemplateUIGameObject = Instantiate(baseUnitTemplateUI, unitTemplateUIParent);
+
+            int remainingAdsCount;
+            int isLocked;
+            if (PlayerPrefs.HasKey(TemplateDataSO.ADS + templateDataSO.unit_ID)) 
+            {
+                remainingAdsCount = PlayerPrefs.GetInt(TemplateDataSO.ADS + templateDataSO.unit_ID);
+            } 
+            else
+            {
+                remainingAdsCount = templateDataSO.adsToWatch;
+                PlayerPrefs.SetInt(TemplateDataSO.ADS + templateDataSO.unit_ID, templateDataSO.adsToWatch);
+                PlayerPrefs.Save();
+            }
+            if (PlayerPrefs.HasKey(TemplateDataSO.IS_LOCKED + templateDataSO.unit_ID))
+            {
+                isLocked = PlayerPrefs.GetInt(TemplateDataSO.IS_LOCKED + templateDataSO.unit_ID);
+            }
+            else
+            {
+                isLocked = (templateDataSO.isLocked) ? 1 : 0;
+                PlayerPrefs.SetInt(TemplateDataSO.IS_LOCKED + templateDataSO.unit_ID, (templateDataSO.isLocked)? 1 : 0);
+                PlayerPrefs.Save();
+            }
+
             unitTemplateUIGameObject.gameObject.SetActive(true);
 
             UnitTemplateUI unitTemplateUI = unitTemplateUIGameObject.GetComponent<UnitTemplateUI>();
-            unitTemplateUI.Initialize(templateDataSO);
+            unitTemplateUI.Initialize(templateDataSO, isLocked, remainingAdsCount);
 
             unitTemplateList.Add(unitTemplateUI);
 
@@ -106,15 +128,21 @@ public class UnitSelectionWindowUI : MonoBehaviour
         return unitTemplateList;
     }
 
+    public int GetSelectedUnitTemplateIndex()
+    {
+        return selectedUnitTemplateIndex;
+    }
 
 
-
-
+    #region SaveSystem
     [Serializable]
     public class SaveObject
     {
         public int unitTemplateIndex;
     }
+
+
+
 
     public SaveObject Save()
     {
@@ -134,8 +162,7 @@ public class UnitSelectionWindowUI : MonoBehaviour
         unitTemplateList[saveObject.unitTemplateIndex].DisplayAsSelected();
         unitTemplateList[saveObject.unitTemplateIndex].isSelected = true;
     }
-
-
+    #endregion
 
     private void ShowWindow()
     {

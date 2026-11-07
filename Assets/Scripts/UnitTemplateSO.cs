@@ -5,4 +5,5 @@ public class UnitTemplateSO : ScriptableObject
 {
     public ObjectPooler.UnitKey unitKey;
     public GameObject unitPrefab;
+    public Material unitMaterial;
 }

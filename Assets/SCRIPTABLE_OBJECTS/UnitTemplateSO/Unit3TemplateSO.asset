@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitTemplateSO
   unitKey: 2
   unitPrefab: {fileID: 6144341895210689580, guid: 8a27599283875b74baa9515f3ab91af3, type: 3}
+  unitMaterial: {fileID: 2100000, guid: 28d7b5a370476854fbb04a8448eeb51e, type: 2}

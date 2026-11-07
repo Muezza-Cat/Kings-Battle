@@ -35,7 +35,7 @@ public class EnemyController : BaseController
 
     private float updateMethodCooldownTime = 0.2f; //10 times per sec;
     private float updateMethodElapsedTime = 0f;
-    private float safeDistance = 10f;
+    private float safeDistance = 15f;
     private float moraleThreshold = 1.25f;
     private float normalMoveSpeed = 4f;
 
@@ -83,7 +83,7 @@ public class EnemyController : BaseController
         //SelectStrategy();
         StrategyStateMachine();
 
-        if (mode == 0) Debug.LogWarning("No Mode set for the EnemyController " + this.name);
+        //if (mode == 0) Debug.LogWarning("No Mode set for the EnemyController " + this.name);
         switch (mode)
         {
             default:
@@ -190,7 +190,6 @@ public class EnemyController : BaseController
 
                 foreach (Transform waypoint in waypoints)
                 {
-                    //if (Vector3.Distance(enemyController.transform.position, waypoint.position) > 5f) continue;
                     float dot = Vector3.Dot((waypoint.position - transform.position), (enemyHordeFormation.transform.position - transform.position));
                     if (dot < minumumDotValue)
                     {

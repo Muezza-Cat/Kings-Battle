@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,7 @@ public class UnitTemplateUI : MonoBehaviour
 
 
     [Header("Reference")]
-    private UnitTemplateSO unitTemplateSO;
+    private TemplateDataSO templateDataSO;
     private UnitSelectionWindowUI unitSelectionWindowUI;
 
 
@@ -29,6 +30,11 @@ public class UnitTemplateUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI unitNameText;
     [SerializeField] private Button selectionButton;
     private TextMeshProUGUI selectionButtonText;
+    
+    /*Testing*/
+    [SerializeField] private Button watchAdsButton;
+    private TextMeshProUGUI watchAdsButtonText;
+
 
 
     [Header("Settings")]
@@ -39,6 +45,7 @@ public class UnitTemplateUI : MonoBehaviour
     private const float bgSelectedAlphaValue = 1f;
 
     public bool isSelected = false;
+    private int remainingAdsCount;
 
 
 
@@ -46,17 +53,48 @@ public class UnitTemplateUI : MonoBehaviour
     {
         unitSelectionWindowUI = GetComponentInParent<UnitSelectionWindowUI>();
         selectionButtonText = selectionButton.GetComponentInChildren<TextMeshProUGUI>();
+        watchAdsButtonText = watchAdsButton.GetComponentInChildren<TextMeshProUGUI>();
+
+        //Testing
+        selectionButton.gameObject.SetActive(true);
+        watchAdsButton.gameObject.SetActive(false);
     }
 
 
 
-    public void Initialize(TemplateDataSO templateDataSO)
+    public void Initialize(TemplateDataSO templateDataSO, int isLocked, int remainingAdsToWatch)
     {
-        unitTemplateSO = templateDataSO.unitTemplateSO;
-        //unitImage.sprite = templateDataSO.unitSprite;
+        if (templateDataSO == null) return;
+
+        this.templateDataSO = templateDataSO;
         unitNameText.text = templateDataSO.UNIT_NAME;
+        //unitImage.sprite = templateDataSO.unitSprite; //Incomplete
+
+        //Testing
+        remainingAdsCount = remainingAdsToWatch;
+
+        if (isLocked == 1) TemplateButtonsOnLocked(remainingAdsToWatch);
+        else TemplateButtonOnUnlocked();
+
+        Debug.Log("Remaining ads count : " + remainingAdsCount + " " + this.name);
+        Debug.Log("Remaining ads to watch : " + remainingAdsToWatch + " " + this.name);
     }
 
+
+    //Visual on Initialization
+    public void TemplateButtonsOnLocked(int adsRemaining)
+    {
+        watchAdsButton.gameObject.SetActive(true);
+        selectionButton.gameObject.SetActive(false);
+
+        watchAdsButtonText.text = $"Watch Ad {adsRemaining} / {templateDataSO.adsToWatch}";
+    }
+
+    public void TemplateButtonOnUnlocked()
+    {
+        watchAdsButton.gameObject.SetActive(false);
+        selectionButton.gameObject.SetActive(true);    
+    }
 
 
 
@@ -76,6 +114,27 @@ public class UnitTemplateUI : MonoBehaviour
             isSelected = true;
             DisplayAsSelected();
         });
+
+        watchAdsButton.onClick.AddListener(() =>
+        {
+            AdsManager.Instance.ShowRewardedAd(OnRewardRewarded);
+        });
+    }
+
+    private void OnRewardRewarded()
+    {
+        remainingAdsCount = Mathf.Max(0, remainingAdsCount - 1);
+        if (remainingAdsCount <= 0) 
+        {
+            PlayerPrefs.SetInt(TemplateDataSO.IS_LOCKED + templateDataSO.unit_ID, 0);
+            TemplateButtonOnUnlocked();
+        } 
+
+        PlayerPrefs.SetInt(TemplateDataSO.ADS + templateDataSO.unit_ID, remainingAdsCount);
+        PlayerPrefs.Save();
+
+        Debug.Log("Updated adsToWatch");
+        watchAdsButtonText.text = $"Watch Ad {remainingAdsCount} / {templateDataSO.adsToWatch}";
     }
 
 
@@ -104,6 +163,6 @@ public class UnitTemplateUI : MonoBehaviour
 
     public UnitTemplateSO GetUnitTemplateSO()
     {
-        return unitTemplateSO;
+        return templateDataSO.unitTemplateSO;
     }
 }

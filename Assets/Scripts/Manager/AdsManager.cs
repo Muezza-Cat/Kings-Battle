@@ -1,4 +1,5 @@
 using System;
+using Unity.Hierarchy;
 using Unity.Services.LevelPlay;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class AdsManager : MonoBehaviour
     private LevelPlayInterstitialAd interstitialAd;
     private LevelPlayRewardedAd rewardedAd;
 
-    private event Action OnRewardedAdCompleted;
+    public event Action OnRewardedAdCompleted;
 
     private bool successfullyInitialized = false;
 
@@ -138,14 +139,27 @@ public class AdsManager : MonoBehaviour
 
     private void RewardedAd_OnAdRewarded(LevelPlayAdInfo arg1, LevelPlayReward arg2)
     {
+        isRewardRewarded = true;
+        Debug.Log("Reward Rewarded");
         OnRewardedAdCompleted?.Invoke();
         OnRewardedAdCompleted = null;
+
+        Time.timeScale = 0f; //Dummy;
     }
 
+    private bool isRewardRewarded = false;
     private void RewardedAd_OnAdClosed(LevelPlayAdInfo obj)
     {
+
+        if (!isRewardRewarded)
+        { 
+            OnRewardedAdCompleted = null;
+            Debug.Log("Cleared OnRewardAdCompleted");
+        }
         //Closed in between;
         rewardedAd.LoadAd();
+
+        Time.timeScale = 0f; //Dummy;
     }
 
 
@@ -159,9 +173,10 @@ public class AdsManager : MonoBehaviour
     {
         if (!IsRewardedAdLoaded()) return;
 
-        OnRewardedAdCompleted += rewardCallback;
-        
+        OnRewardedAdCompleted = rewardCallback;
+        isRewardRewarded = false;
         rewardedAd.ShowAd();
+        Time.timeScale = 1f; //Dummy;
     }
     #endregion
 
