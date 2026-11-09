@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Collection")]
     [SerializeField] private List<DifficultyMode> difficultyModes;
+    [SerializeField] private TemplateDataSO enemyTemplateDataSO;
 
     [Header("Setting")]
     public float singleUnitMorale = 2f;
@@ -32,5 +33,10 @@ public class EnemyManager : MonoBehaviour
     public int GetEnemyHordeCount()
     {
         return difficultyModes.Count;
+    }
+    
+    public TemplateDataSO GetEnemyTemplateDataSO()
+    {
+        return enemyTemplateDataSO;
     }
 }

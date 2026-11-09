@@ -40,7 +40,7 @@ public class GameplayManager : MonoBehaviour
 
 
     [Header("Settings")]
-    [SerializeField] private int Lives = 4;
+    [SerializeField] private int Lives = 2;
 
     [Header("Score")]
     private int baseFlagSPM = 60; //SPM = Score Per Minute
@@ -196,6 +196,8 @@ public class GameplayManager : MonoBehaviour
                 if (hordeFormation == playerHorde) GameStateManager.Instance.state = GameStateManager.State.Over;
                 
                 hordeFormation.gameObject.SetActive(false);
+                hordeFormation.GetComponent<EnemyIndicator>().GetIndicator().SetActive(false);
+                hordeFormation.gameObject.transform.position = Vector3.zero;
                 aliveHordeFormations.Remove(hordeFormation);
                 hordeFormation.UpdatePlayerLives -= PlayerLivesCounterRemake;
             }

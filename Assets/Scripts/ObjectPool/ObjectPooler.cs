@@ -20,7 +20,6 @@ public class ObjectPooler : MonoBehaviour
     //Testing
     public GameObject playerUnitPrefab;
     [SerializeField] private GameObject enemyUnit;
-    //[SerializeField] private GameObject unit;
     [SerializeField] private GameObject coin;
     [SerializeField] private GameObject apple;
 
@@ -48,7 +47,19 @@ public class ObjectPooler : MonoBehaviour
     {
         Man,
         Woman,
-        Child,
+        UnarmedMaceWarrior,
+        UnarmedSpearsman,
+        CastleGuard,
+        SwordsMan,
+        SpearsMan,
+        MaceWarrior,
+        Grunt,
+        HeavySpearsMan,
+        Commander,
+        Master,
+        General,
+        GrandMaster,
+        King,
     }
 
 
@@ -195,7 +206,6 @@ public class ObjectPooler : MonoBehaviour
 
 
 
-    //Testing
     public GameObject SpawnUnit(Vector3 spawnPosition, Quaternion spawnRotation, HordeFormation hordeFormation)
     {
         GameObject unitToSpawn = bigPool[hordeFormation.GetBaseController().poolKey].Dequeue();
@@ -238,7 +248,6 @@ public class ObjectPooler : MonoBehaviour
     }
 
 
-    //Under Construction
     public void SpawnApple(Vector3 spawnPosition, Quaternion spawnRotation)
     {
         GameObject appleToSpawn = bigPool[PoolKey.Apple].Dequeue();
@@ -287,7 +296,7 @@ public class ObjectPooler : MonoBehaviour
     }
 
 
-
+    #region SaveSystem
     [Serializable]
     public class SaveObject
     {
@@ -305,4 +314,5 @@ public class ObjectPooler : MonoBehaviour
         UnitSelector.Instance.selectedUnitKey = saveObject.unitKey;
         playerUnitPrefab = GetUnitPrefab(saveObject.unitKey);
     }
+    #endregion
 }

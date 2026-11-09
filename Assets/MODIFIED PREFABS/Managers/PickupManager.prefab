@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099ec9ca91e1d824cb4e153b37c1a9d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinManager
-  minXPos: 20
-  maxXPos: 170
-  minZPos: 17
-  maxZPos: 180
+  minXPos: 5
+  maxXPos: 120
+  minZPos: 5
+  maxZPos: 120
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 456
+    m_Bits: 200

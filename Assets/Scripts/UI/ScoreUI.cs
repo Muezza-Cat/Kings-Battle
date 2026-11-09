@@ -41,9 +41,8 @@ public class ScoreUI : MonoBehaviour
             ScoreBarUI scoreBarUI = Instantiate(scoreUITemplate, transform).GetComponent<ScoreBarUI>();
             scoreBarUI.hordeFormation = hordeFormation;
             scoreBarUI.gameObject.SetActive(true);
-
-            TextMeshProUGUI scoreText = scoreBarUI.GetComponentInChildren<TextMeshProUGUI>();
-            scoreTextList.Add(scoreText);
+            
+            scoreTextList.Add(scoreBarUI.scoreText);
 
             scoreBarTransformList.Add(scoreBarUI.scoreBar.rectTransform);
             scoreBarUI.scoreBar.color = GameplayManager.Instance.GetUnitMaterial(hordeFormation).color;

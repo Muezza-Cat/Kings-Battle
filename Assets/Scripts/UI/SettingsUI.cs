@@ -57,14 +57,14 @@ public class SettingsUI : MonoBehaviour
             ResetValues();
         });
 
-        saveButton.onClick.AddListener(() =>
-        {
-            UIManager.Instance.DisableSettingsWindow();
-        });
-        crossButton.onClick.AddListener(() =>
-        {
-            UIManager.Instance.DisableSettingsWindow();
-        });
+        //saveButton.onClick.AddListener(() =>
+        //{
+        //    UIManager.Instance.DisableSettingsWindow();
+        //});
+        //crossButton.onClick.AddListener(() =>
+        //{
+        //    UIManager.Instance.DisableSettingsWindow();
+        //});
 
 
 
@@ -97,7 +97,7 @@ public class SettingsUI : MonoBehaviour
         });
 
 
-        UIManager.Instance.DisableSettingsWindow();
+        //UIManager.Instance.DisableSettingsWindow();
     }
 
 

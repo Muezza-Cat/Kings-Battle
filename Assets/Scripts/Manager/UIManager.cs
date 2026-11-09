@@ -15,13 +15,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuContainer;
     [SerializeField] private GameObject pauseWindowUI;
     [SerializeField] private GameObject gameOverWindowUI;
-    [SerializeField] private GameObject settingsWindowUI;
+    //[SerializeField] private GameObject settingsWindowUI;
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject touchToStartUI;
+    [SerializeField] private GameObject creditsWindowUI;
     //[SerializeField] private GameObject joystickUI;
 
-    [SerializeField] private Button settingsButton;
+    //[SerializeField] private Button settingsButton;
     [SerializeField] private Button pauseButton;
+    [SerializeField] private Button openCreditsButton;
 
     private SettingsUI settingsUI;
     private PauseWindowUI pauseUI;
@@ -37,8 +39,8 @@ public class UIManager : MonoBehaviour
         DisableInGameUI();
         DisableTouchToStartUI();
 
-        settingsUI = settingsWindowUI.GetComponent<SettingsUI>();
-        if (settingsUI == null) Debug.LogWarning("Null reference to settingsUI");
+        //settingsUI = settingsWindowUI.GetComponent<SettingsUI>();
+        //if (settingsUI == null) Debug.LogWarning("Null reference to settingsUI");
         pauseUI = pauseWindowUI.GetComponent<PauseWindowUI>();
         if (pauseUI == null) Debug.LogWarning("Null reference to pauseUI");
     }
@@ -46,18 +48,34 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        settingsButton.onClick.AddListener(() =>
-        {
-            EnableSettingsWindow();
-        });
+        //settingsButton.onClick.AddListener(() =>
+        //{
+        //    EnableSettingsWindow();
+        //});
         pauseButton.onClick.AddListener(() =>
         {
             EnablePauseWindow();
 
             GameStateManager.Instance.ToggleGameState();
         });
+        openCreditsButton.onClick.AddListener(() => 
+        {
+            EnableCreditsWindow();
+        });
     }
 
+
+
+    //Credits Window
+    public void EnableCreditsWindow()
+    {
+        creditsWindowUI.SetActive(true);
+    }
+
+    public void DisableCreditsWindow()
+    {
+        creditsWindowUI.SetActive(false);
+    }
 
 
     //MainMenuUI
@@ -81,16 +99,16 @@ public class UIManager : MonoBehaviour
     }
 
     //Settings Window
-    public void EnableSettingsWindow()
-    {
-        settingsWindowUI.SetActive(true);
-        settingsButton.gameObject.SetActive(false);
-    }
-    public void DisableSettingsWindow()
-    {
-        settingsWindowUI.SetActive(false);
-        settingsButton.gameObject.SetActive(true);
-    }
+    //public void EnableSettingsWindow()
+    //{
+    //    settingsWindowUI.SetActive(true);
+    //    settingsButton.gameObject.SetActive(false);
+    //}
+    //public void DisableSettingsWindow()
+    //{
+    //    settingsWindowUI.SetActive(false);
+    //    settingsButton.gameObject.SetActive(true);
+    //}
 
     //Pause Window
     public void EnablePauseWindow()

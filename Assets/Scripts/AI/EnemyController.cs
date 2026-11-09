@@ -11,6 +11,13 @@ public class EnemyController : BaseController
     [HideInInspector] public float moraleCount { get; private set; }
     private DifficultyMode.DifficultyModes mode; //EnemyController difficulty mode;
 
+    private enum EnemyType
+    {
+        NormalEnemy,
+        SuicideDiver,
+    }
+    [SerializeField] private EnemyType enemyType;
+
     private enum Decision
     {
         Fight,
@@ -21,7 +28,7 @@ public class EnemyController : BaseController
 
     [Header("Reference")]
     private NavMeshAgent agent;
-    private HordeFormation enemyControllerHordeFormation;
+    private HordeFormation hordeFormation;
     private Animator animator;
 
     [Header("Collection")]
@@ -58,7 +65,7 @@ public class EnemyController : BaseController
         path = new NavMeshPath();
 
 
-        enemyControllerHordeFormation = GetComponent<HordeFormation>();
+        hordeFormation = GetComponent<HordeFormation>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
 
@@ -98,7 +105,7 @@ public class EnemyController : BaseController
                 StateMachine(); //Handle different Decisions;
                 ScanThreatsNearby(); //Continuously scan for threats nearby;
 
-                if (threatNearby.Count > 0) HardBotDecisionMakingProcess();
+                if (threatNearby.Count > 0) BotDecisionMakingProcess();
                 else decision = Decision.Ignore;
                 break;
         }
@@ -147,7 +154,7 @@ public class EnemyController : BaseController
 
     private void AddUnitStrategy()
     {
-        enemyControllerHordeFormation.AddUnit();
+        hordeFormation.AddUnit();
     }
 
     private void UpgradeStatsStrategy()
@@ -179,10 +186,10 @@ public class EnemyController : BaseController
     {
         foreach (HordeFormation enemyHordeFormation in GameplayManager.Instance.GetHordeFormation())
         {
-            if (enemyHordeFormation == enemyControllerHordeFormation) continue; //Except this controller;
+            if (enemyHordeFormation == hordeFormation) continue; //Except this controller;
             if (Vector3.Distance(transform.position, enemyHordeFormation.transform.position) > safeDistance) continue; //Enemy very close;
 
-            if (enemyHordeFormation.hordeMorale > enemyControllerHordeFormation.hordeMorale * moraleThreshold) //If enemy is 1.25x or more stronger compared to us.
+            if (enemyHordeFormation.hordeMorale > hordeFormation.hordeMorale * moraleThreshold) //If enemy is 1.25x or more stronger compared to us.
             {
                 float minumumDotValue = 1f;
                 Transform waypointAwayFromEnemy = null;
@@ -221,13 +228,15 @@ public class EnemyController : BaseController
                 AvoidStrongEnemies();
                 break;
             case Decision.Ignore:
-                NormalAgentPatrol();
+                if (enemyType == EnemyType.SuicideDiver && hordeFormation.GetUnitCount() >= 15) agent.SetDestination(GameplayManager.Instance.playerHorde.transform.position);
+                else NormalAgentPatrol();
+
                 break;
         }
     }
 
 
-    private void HardBotDecisionMakingProcess()
+    private void BotDecisionMakingProcess()
     {
         foreach (HordeFormation hordeFomration in threatNearby)
         {
@@ -270,7 +279,7 @@ public class EnemyController : BaseController
         threatNearby.Clear();
         foreach (HordeFormation enemyHordeFormation in GameplayManager.Instance.GetHordeFormation())
         {
-            if (enemyHordeFormation == enemyControllerHordeFormation) continue;
+            if (enemyHordeFormation == hordeFormation) continue;
             if (IsInThreatRadii(enemyHordeFormation))
             {
                 threatNearby.Add(enemyHordeFormation);
@@ -304,7 +313,7 @@ public class EnemyController : BaseController
     {
         foreach (HordeFormation enemyHordeFormation in threatNearby)
         {
-            if (enemyHordeFormation.hordeMorale > enemyControllerHordeFormation.hordeMorale * moraleThreshold) //Enemy moraleThreshold..x stronger than us;
+            if (enemyHordeFormation.hordeMorale > hordeFormation.hordeMorale * moraleThreshold) //Enemy moraleThreshold..x stronger than us;
             {
                 return true;
             }

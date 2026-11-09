@@ -23,7 +23,7 @@ public static class SceneLoader
     {
         if (index > SceneManager.sceneCountInBuildSettings - 1)
         {
-            index = 1;
+            index = SceneManager.sceneCountInBuildSettings - 2;
         }
         //SceneLoader.targetScene = targetScene;
         targetSceneIndex = index;

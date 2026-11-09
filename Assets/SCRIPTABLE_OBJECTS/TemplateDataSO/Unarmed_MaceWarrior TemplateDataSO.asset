@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acae742338b35f049bf15ae7b39f2928, type: 3}
+  m_Name: Unarmed_MaceWarrior TemplateDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::TemplateDataSO
+  unitTemplateSO: {fileID: 11400000, guid: 74b616f0ad09d6147b594000ffe2c29e, type: 2}
+  unitSprite: {fileID: 21300000, guid: 82367845db9bb66468d4ebe5f7ba9f30, type: 3}
+  templateBGColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.50980395}
+  UNIT_NAME: Unarmed Mace Warrior
+  unit_ID: soldier8
+  adsToWatch: 1
+  isLocked: 1
+  damage: 1.2
+  hp: 0.9

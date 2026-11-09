@@ -43,6 +43,8 @@ public class PauseWindowUI : MonoBehaviour
             GameStateManager.Instance.ToggleGameState();
             // </Testing>
 
+            AdsManager.Instance.ShowInterstitialAd();
+
             SceneLoader.ReloadSceneAsRestartGame();
 
         });

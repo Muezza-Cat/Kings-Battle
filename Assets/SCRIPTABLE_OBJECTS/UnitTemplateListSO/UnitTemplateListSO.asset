@@ -15,4 +15,16 @@ MonoBehaviour:
   templateDataSOList:
   - {fileID: 11400000, guid: 03b21d084b051a04c95d60040b0f56ac, type: 2}
   - {fileID: 11400000, guid: 00fc50d5ef1e43740be8a8b361b044fd, type: 2}
+  - {fileID: 11400000, guid: 1649814cd1593da4493003498b70ae31, type: 2}
+  - {fileID: 11400000, guid: 043384caef4f0bd4889d3bb156dc80d5, type: 2}
   - {fileID: 11400000, guid: 5416e30e91f68ec46a6c91e6c8e73986, type: 2}
+  - {fileID: 11400000, guid: 8b0bb856a4721db468f3ff78ee7ed5aa, type: 2}
+  - {fileID: 11400000, guid: 61c1d12a718209948aff0517dcdb23f8, type: 2}
+  - {fileID: 11400000, guid: 6bcf64b30a950074fa25de5545731e7b, type: 2}
+  - {fileID: 11400000, guid: 5bd821e13c7f2e148a5b731894a34652, type: 2}
+  - {fileID: 11400000, guid: 0177efcaf7fb9a848a85373071738e98, type: 2}
+  - {fileID: 11400000, guid: f2479c884bcaeb84bbc37533111113be, type: 2}
+  - {fileID: 11400000, guid: 942ae094dd76eab41a4ff6a3bc96dfc2, type: 2}
+  - {fileID: 11400000, guid: f0a4d22dfcff3b14aa95e4f0171088ca, type: 2}
+  - {fileID: 11400000, guid: 93e5ce7e0ae839e4cb863bb21365a2d8, type: 2}
+  - {fileID: 11400000, guid: b56df12d14a8cbe41af716832dbafb22, type: 2}

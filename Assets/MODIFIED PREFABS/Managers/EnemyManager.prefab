@@ -47,5 +47,6 @@ MonoBehaviour:
   difficultyModes:
   - enemyController: {fileID: 0}
     difficultyMode: 3
+  enemyTemplateDataSO: {fileID: 11400000, guid: 03b21d084b051a04c95d60040b0f56ac, type: 2}
   singleUnitMorale: 2
   unitGroupMorale: 10

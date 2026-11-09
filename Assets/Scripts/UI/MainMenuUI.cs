@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -15,11 +16,12 @@ public class MainMenuUI : MonoBehaviour
     [Header("Reference")]
     private UIManager uiManager;
     private GameStateManager gameStateManager;
-    [SerializeField] private SettingsUI settingsUI;
+    //[SerializeField] private SettingsUI settingsUI;
     private TouchInputSystem touchInputSystem;
 
 
-    [Header("MainMenuUI Buttons")]
+    [Header("MainMenuUI Buttons & Text")]
+    [SerializeField] private TextMeshProUGUI levelNumberText;
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
 /*
@@ -41,6 +43,8 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.HasKey(GameOverResultUI.LEVEL_KEY)) levelNumberText.text = $"Level {PlayerPrefs.GetInt(GameOverResultUI.LEVEL_KEY)}";
+
         touchInputSystem = new TouchInputSystem();
         uiManager = UIManager.Instance;
         gameStateManager = GameStateManager.Instance;
@@ -71,7 +75,6 @@ public class MainMenuUI : MonoBehaviour
 
         uiManager.DisableTouchToStartUI();
         uiManager.DisableInGameUI();
-        
     }
 
 

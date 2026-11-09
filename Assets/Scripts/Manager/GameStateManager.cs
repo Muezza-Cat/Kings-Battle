@@ -53,9 +53,9 @@ public class GameStateManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Before Toggle In GameStateManager : " + Time.timeScale);
+        Debug.Log("Before Toggle in GameStateManager : " + Time.timeScale);
         ToggleGameState();
-        Debug.Log("After Toggle In GameStateManager : " + Time.timeScale);
+        Debug.Log("After Toggle in GameStateManager : " + Time.timeScale);
     }
 
 

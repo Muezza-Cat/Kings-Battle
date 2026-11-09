@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acae742338b35f049bf15ae7b39f2928, type: 3}
+  m_Name: Commander TemplateDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::TemplateDataSO
+  unitTemplateSO: {fileID: 11400000, guid: 9384e31df829efc44b89f6c454d5cf2c, type: 2}
+  unitSprite: {fileID: 21300000, guid: 6db9878146732f045bfe6d49e96f6734, type: 3}
+  templateBGColor: {r: 0.5451994, g: 0, b: 1, a: 0.50980395}
+  UNIT_NAME: Commander
+  unit_ID: soldier7
+  adsToWatch: 5
+  isLocked: 1
+  damage: 2.2
+  hp: 2.1

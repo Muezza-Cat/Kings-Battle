@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 
@@ -41,6 +40,8 @@ public class PlayerController : BaseController
         moveHash = Animator.StringToHash(MOVE);
     }
 
+
+
     private void Update()
     {
         MovementHandler();
@@ -48,7 +49,6 @@ public class PlayerController : BaseController
     }
 
 
-    
 
     private void MovementHandler()
     {

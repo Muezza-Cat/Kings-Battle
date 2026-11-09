@@ -9,17 +9,110 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScene.unity
     guid: 0c22ec42c90f901498dbe50ab7090185
   - enabled: 1
-    path: Assets/Scenes/BaseGrassScene(Small).unity
-    guid: 4f385ac5ff216a4489d4677b1f01fee8
+    path: Assets/Scenes/Level_01.unity
+    guid: 6883b07143373504bbbff0cc052087c7
   - enabled: 1
-    path: Assets/Scenes/BaseDesertScene(Small).unity
-    guid: fc712ea594fea9242af797c0cff9bc0b
+    path: Assets/Scenes/Level_02.unity
+    guid: 13a96f894bb0f714b9d332d862a6d2f6
+  - enabled: 1
+    path: Assets/Scenes/Level_03.unity
+    guid: 561fddc4b342614469eb54d308ac70d2
+  - enabled: 1
+    path: Assets/Scenes/Level_04.unity
+    guid: 1700bf909e89d1a40a95f83c3edc225b
+  - enabled: 1
+    path: Assets/Scenes/Level_05.unity
+    guid: f894594b218607c4e8dec789a290dc46
+  - enabled: 1
+    path: Assets/Scenes/Level_06.unity
+    guid: db2328f12bfd8974fac4200799cdc62a
+  - enabled: 1
+    path: Assets/Scenes/Level_07.unity
+    guid: d7abf6d138f7cab419448d5eeb08f961
+  - enabled: 1
+    path: Assets/Scenes/Level_08.unity
+    guid: 11edc6a4ef994284dbdc29ad0638bc30
+  - enabled: 1
+    path: Assets/Scenes/Level_09.unity
+    guid: 44a196fb620110849afb8b734735f932
+  - enabled: 1
+    path: Assets/Scenes/Level_10.unity
+    guid: af1a7881b31cf1f4283236d44fc34353
+  - enabled: 1
+    path: Assets/Scenes/Level_11.unity
+    guid: ef94dc4622388604d871a98114dcf4a8
   - enabled: 1
     path: Assets/Scenes/Level_12.unity
-    guid: d034b1a30f61ff14bb7040783cc65c76
+    guid: 04fd9e78526a55a45bec1ce7e372ef93
   - enabled: 1
-    path: Assets/Scenes/BasicSceneTemplate (Testing).unity
-    guid: 136b6f634e676444dad668c5cea06ec6
+    path: Assets/Scenes/Level_13.unity
+    guid: 15bc72b167c4d2e4385c8fac1d8cb30b
+  - enabled: 1
+    path: Assets/Scenes/Level_14.unity
+    guid: a1c8a9dff4a113b4db5f1f206f547ebc
+  - enabled: 1
+    path: Assets/Scenes/Level_15.unity
+    guid: fd8ba59973ccc734dbb9e2721af1df84
+  - enabled: 1
+    path: Assets/Scenes/Level_16.unity
+    guid: b3f6b6879291bfb45888265ab747aa15
+  - enabled: 1
+    path: Assets/Scenes/Level_17.unity
+    guid: 97eddd8af36a8074c85bb2eea1ea34a7
+  - enabled: 1
+    path: Assets/Scenes/Level_18.unity
+    guid: 6d0ea9783ac456f4cb2b967f2df5506f
+  - enabled: 1
+    path: Assets/Scenes/Level_19.unity
+    guid: dcf9f89497fc42943ba3840545ecce59
+  - enabled: 1
+    path: Assets/Scenes/Level_20.unity
+    guid: 836efb51ec3ee824089dbbc8a8b61127
+  - enabled: 1
+    path: Assets/Scenes/Level_21.unity
+    guid: b0018f2fa024d50419b6e7f4d7dc19d9
+  - enabled: 1
+    path: Assets/Scenes/Level_22.unity
+    guid: ed497115b33a92842842b9616d46af14
+  - enabled: 1
+    path: Assets/Scenes/Level_23.unity
+    guid: 495b3f6cded512942bfa7e19f1c3f898
+  - enabled: 1
+    path: Assets/Scenes/Level_24.unity
+    guid: 9d8507284dcbcd04c9365b296f7148cd
+  - enabled: 1
+    path: Assets/Scenes/Level_25.unity
+    guid: b7b930db71f3a564c9661e61f6759c15
+  - enabled: 1
+    path: Assets/Scenes/Level_26.unity
+    guid: 30fafca801768304090af230ecc31bd6
+  - enabled: 1
+    path: Assets/Scenes/Level_27.unity
+    guid: de18942529b6dcd44b5ed4a80d8aed20
+  - enabled: 1
+    path: Assets/Scenes/Level_28.unity
+    guid: 3a6f08e3c371d46498138f589073653c
+  - enabled: 1
+    path: Assets/Scenes/Level_29.unity
+    guid: 163d242ab48c81d46a58ebbfdb3f7a6e
+  - enabled: 1
+    path: Assets/Scenes/Level_30.unity
+    guid: 6a61de02fba76b44c9dca8f647011d91
+  - enabled: 1
+    path: Assets/Scenes/Level_31.unity
+    guid: 1b09644de816d8e4ab58060bd172d9f6
+  - enabled: 1
+    path: Assets/Scenes/Level_32.unity
+    guid: f0e7c1eda0e326543bba38f0f3b25119
+  - enabled: 1
+    path: Assets/Scenes/Level_33.unity
+    guid: 076b509dd6da3ba40b1ac872de49a340
+  - enabled: 1
+    path: Assets/Scenes/Level_34.unity
+    guid: 2514c9801a615024988cc98106296efd
+  - enabled: 1
+    path: Assets/Scenes/Level_35.unity
+    guid: 9d4b444bc8ae50743b7244585d49a398
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

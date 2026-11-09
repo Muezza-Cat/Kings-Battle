@@ -34,7 +34,6 @@ public class UnitSelectionWindowUI : MonoBehaviour
     [SerializeField] private Button openUnitSelectionUIButton;
     [SerializeField] private Button closeUnitSelectionUIButton;
 
-
     [Header("Collection")]
     private List<UnitTemplateUI> unitTemplateList;
 
@@ -43,8 +42,8 @@ public class UnitSelectionWindowUI : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.DeleteAll();
         Instance = this;
+
         unitTemplateList = new List<UnitTemplateUI>();
 
         /*foreach (Transform child in transform)
@@ -92,6 +91,21 @@ public class UnitSelectionWindowUI : MonoBehaviour
             unitTemplateList.Add(unitTemplateUI);
 
             unitTemplateUI.OnTemplateUpdated += UnitTemplateUI_OnTemplateUpdated;
+        }
+
+        if (AdsManager.Instance != null && AdsManager.Instance.rewardedAdLoaded)
+        {
+            foreach (UnitTemplateUI unitTemplateUI in unitTemplateList)
+            {
+                unitTemplateUI.RedOutWatchAdsButton();
+            }
+        }
+        else
+        {
+            foreach (UnitTemplateUI unitTemplateUI in unitTemplateList)
+            {
+                unitTemplateUI.GrayOutWatchAdsButton();
+            }
         }
     }
 

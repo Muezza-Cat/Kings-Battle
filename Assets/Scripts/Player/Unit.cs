@@ -46,13 +46,10 @@ public class Unit : MonoBehaviour
         }
     }
 
-
     private float attackRange = 1f;
-    public float damageAmount = 1f;
 
     //HitPoints
-    private float troughHP = 0.3f;
-    private float crestHP = 3f;
+    private float damageAmount = 1f;
 
     //Linear Velocity
     private float crestMoveSpeed = 6f;
@@ -84,7 +81,6 @@ public class Unit : MonoBehaviour
 
     private void OnEnable()
     {
-        CurrentHealth = UnityEngine.Random.Range(troughHP, crestHP);
         currentMoveSpeed = UnityEngine.Random.Range(troughMoveSpeed, crestMoveSpeed);
 
         isFighting = false;
@@ -100,9 +96,22 @@ public class Unit : MonoBehaviour
 
         foreach (SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRendererList)
         {
-            skinnedMeshRenderer.material = hordeFormation.unitMaterial;
-            //if (hordeFormation == GameplayManager.Instance.playerHorde)
-            //skinnedMeshRenderer.material = UnitSelectionWindowUI.Instance.GetUnitTemplateList()[UnitSelectionWindowUI.Instance.GetSelectedUnitTemplateIndex()].GetUnitTemplateSO().unitMaterial;
+            if (hordeFormation == GameplayManager.Instance.playerHorde)
+                skinnedMeshRenderer.material = UnitSelectionWindowUI.Instance.GetUnitTemplateList()[UnitSelectionWindowUI.Instance.GetSelectedUnitTemplateIndex()].GetUnitTemplateSO().unitMaterial;
+            else 
+                skinnedMeshRenderer.material = hordeFormation.unitMaterial;
+        }
+
+        //Update Health and Damage of Units;
+        if (hordeFormation.GetBaseController() is PlayerController)
+        {
+            CurrentHealth = UnitSelectionWindowUI.Instance.GetUnitTemplateList()[UnitSelectionWindowUI.Instance.GetSelectedUnitTemplateIndex()].GetTemplateDataSO().hp;
+            damageAmount = UnitSelectionWindowUI.Instance.GetUnitTemplateList()[UnitSelectionWindowUI.Instance.GetSelectedUnitTemplateIndex()].GetTemplateDataSO().damage;
+        }
+        else
+        {
+            CurrentHealth = EnemyManager.Instance.GetEnemyTemplateDataSO().hp;
+            damageAmount = EnemyManager.Instance.GetEnemyTemplateDataSO().damage;
         }
     }
 

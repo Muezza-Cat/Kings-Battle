@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 
-//Flag count is fixed for all levels i.e : 5;
 public class FlagUI : MonoBehaviour
 {
     [SerializeField] private RectTransform parentRectTransform;

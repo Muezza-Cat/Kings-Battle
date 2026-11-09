@@ -28,6 +28,7 @@ public class AdsManager : MonoBehaviour
 
     private bool successfullyInitialized = false;
 
+    public bool rewardedAdLoaded = false;
 
 
 
@@ -130,36 +131,44 @@ public class AdsManager : MonoBehaviour
     private void RewardedAd_OnAdLoaded(LevelPlayAdInfo obj)
     {
         Debug.Log("Rewarded Ad was Loaded");
+
+        rewardedAdLoaded = true;
+        //foreach (UnitTemplateUI unitTemplateUI in UnitSelectionWindowUI.Instance.GetUnitTemplateList())
+        //{
+        //    unitTemplateUI.RedOutWatchAdsButton();
+        //    Debug.Log("Red out all the unitTemplateUI's");
+        //}
+        //foreach (UnitTemplateUI unitTemplateUI in UnitSelectionWindowUI.Instance.GetUnitTemplateList())
+        //{
+        //    unitTemplateUI.GrayOutWatchAdsButton();
+        //    Debug.Log("Grayed out all the unitTemplateUI's");
+        //}
     }
     private void RewardedAd_OnAdLoadFailed(LevelPlayAdError obj)
     {
         Debug.Log("Rewarded Ad was NOT Loaded");
+        OnRewardedAdCompleted = null;
+
+        rewardedAdLoaded = false;
+        //foreach (UnitTemplateUI unitTemplateUI in UnitSelectionWindowUI.Instance.GetUnitTemplateList())
+        //{
+        //    unitTemplateUI.GrayOutWatchAdsButton();
+        //    Debug.Log("Grayed out all the unitTemplateUI's");
+        //}
+
         rewardedAd.LoadAd();
     }
 
     private void RewardedAd_OnAdRewarded(LevelPlayAdInfo arg1, LevelPlayReward arg2)
     {
-        isRewardRewarded = true;
         Debug.Log("Reward Rewarded");
         OnRewardedAdCompleted?.Invoke();
         OnRewardedAdCompleted = null;
-
-        Time.timeScale = 0f; //Dummy;
     }
 
-    private bool isRewardRewarded = false;
     private void RewardedAd_OnAdClosed(LevelPlayAdInfo obj)
     {
-
-        if (!isRewardRewarded)
-        { 
-            OnRewardedAdCompleted = null;
-            Debug.Log("Cleared OnRewardAdCompleted");
-        }
-        //Closed in between;
         rewardedAd.LoadAd();
-
-        Time.timeScale = 0f; //Dummy;
     }
 
 
@@ -173,10 +182,9 @@ public class AdsManager : MonoBehaviour
     {
         if (!IsRewardedAdLoaded()) return;
 
+        OnRewardedAdCompleted = null;
         OnRewardedAdCompleted = rewardCallback;
-        isRewardRewarded = false;
         rewardedAd.ShowAd();
-        Time.timeScale = 1f; //Dummy;
     }
     #endregion
 

@@ -35,9 +35,7 @@ public class Flag : MonoBehaviour
     private void Update()
     {
         DetectHordeAroundFlag();
-
         SetFlagOwner();
-        EnableUnitsAddition();
     }
 
 
@@ -84,6 +82,16 @@ public class Flag : MonoBehaviour
             {
                 hordeNearby.Add(hordeFormation);
             }
+        }
+
+        //Testing
+        if (flagOwner != null && (flagOwner.transform.position - transform.position).sqrMagnitude < 10f * 10f)
+        {
+            isPlayerNearby = true;
+        }
+        else
+        {
+            isPlayerNearby = false;
         }
     }
 
@@ -159,19 +167,7 @@ public class Flag : MonoBehaviour
 
 
     public bool isPlayerNearby = false;
-    private float interactableDistance = 10f;
-    private void EnableUnitsAddition()
-    {
-        if (flagOwner == null) return;
-        if ((flagOwner.transform.position - transform.position).sqrMagnitude < interactableDistance * interactableDistance)
-        {
-            isPlayerNearby = true;
-        }
-        else
-        {
-            isPlayerNearby = false;
-        }
-    }
+    
 
     public HordeFormation GetFlagOwner()
     {

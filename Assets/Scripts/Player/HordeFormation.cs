@@ -27,7 +27,7 @@ public class HordeFormation : MonoBehaviour
 
     [Header("Setting")]
     [SerializeField] private int startingUnitsCount = 4;
-    public int perUnitCost { get; private set; } = 5;
+    public int perUnitCost { get; private set; } = 3;
     public int numberOfColumns { get; private set; } = 5; //X-Axis;
     public int numberOfRows { get; private set; } = 5; //Z-Axis;
     public float unitSpacingX { get; private set; }
@@ -208,9 +208,10 @@ public class HordeFormation : MonoBehaviour
 
 
     public bool isNearAFlag = false;
+    [HideInInspector] public float unitAdditionAccessRange = 10f;
     public void AddUnit()
     {
-        if ((GameplayManager.Instance.GetHomeTransform(this).position - transform.position).sqrMagnitude < 10f * 10f)
+        if ((GameplayManager.Instance.GetHomeTransform(this).position - transform.position).sqrMagnitude < unitAdditionAccessRange * unitAdditionAccessRange)
         {
             if (RemoveCoin(perUnitCost))
             {
@@ -230,8 +231,6 @@ public class HordeFormation : MonoBehaviour
             }
         }
     }
-
-
     public void RemoveUnit(Transform unit)
     {
         units.Remove(unit);
@@ -240,6 +239,7 @@ public class HordeFormation : MonoBehaviour
         UpdatePlayerLives?.Invoke(this);
         //if (this.TryGetComponent<PlayerController>(out PlayerController controller)) Debug.Log("Removed Unit : " + units.Count);
     }
+
 
     public void ClearUnitsList()
     {

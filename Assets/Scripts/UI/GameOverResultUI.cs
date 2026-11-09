@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Analytics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -54,6 +53,9 @@ public class GameOverResultUI : MonoBehaviour
     private string LOSE = "Defeat";
     private string WIN = "Victory";
 
+    //PlayerPrefs saving level number;
+    public const string LEVEL_KEY = "level";
+    private int levelNumber = 1;
 
     /*[Header("Flag")]
     private bool isLevelCompleted = false;*/
@@ -62,6 +64,8 @@ public class GameOverResultUI : MonoBehaviour
 
     private void Awake()
     {
+        if(PlayerPrefs.HasKey(LEVEL_KEY)) levelNumber = PlayerPrefs.GetInt(LEVEL_KEY);  
+
         sortedScoreList = new List<float>();
         sortedHordeByScore = new List<HordeFormation>();
 
@@ -84,6 +88,10 @@ public class GameOverResultUI : MonoBehaviour
         {
             AdsManager.Instance.ShowInterstitialAd();
             SceneLoader.LoadScene(/*(SceneLoader.Scene) SceneManager.GetActiveScene().buildIndex*/ SceneManager.GetActiveScene().buildIndex + 1);
+            levelNumber++;
+
+            PlayerPrefs.SetInt(LEVEL_KEY, levelNumber);
+            PlayerPrefs.Save();
         });
         restartButton.onClick.AddListener(() =>
         {
@@ -114,21 +122,24 @@ public class GameOverResultUI : MonoBehaviour
 
             ShowDefeatTemplate();
 
+            Debug.Log("Before Toggle in GameOver : " + Time.timeScale);
             gameStateManager.ToggleGameState();
+            Debug.Log("After Toggle in GameOver : " + Time.timeScale);
         }
         else if (gameplayManager.IsPlayerTheOnlySurviver())
         {
-            Debug.Log("Ran only player remaining condition");
-
             UIManager.Instance.EnableGameOverWindowUI();
             
             CalculateFinalScore(GetDeadHordeList());
             DisplayFinalScores();
 
+            winnerHorde = gameplayManager.playerHorde;
             ShowVictoryTemplate();
             GameStateManager.Instance.isPlayerTheWinner = true;
 
+            Debug.Log("Before Toggle in GameOver : " + Time.timeScale);
             gameStateManager.ToggleGameState();
+            Debug.Log("After Toggle in GameOver : " + Time.timeScale);
         }
         else if (gameStateManager.IsGameOver())
         {
@@ -148,9 +159,9 @@ public class GameOverResultUI : MonoBehaviour
                 ShowDefeatTemplate();
             }
 
-            Debug.Log("Before GameOver TimeScale : " + Time.timeScale);
+            Debug.Log("Before Toggle in GameOver : " + Time.timeScale);
             gameStateManager.ToggleGameState();
-            Debug.Log("After GameOver TimeScale : " + Time.timeScale);
+            Debug.Log("After Toggle in GameOver : " + Time.timeScale);
         }
     }
 
@@ -186,9 +197,11 @@ public class GameOverResultUI : MonoBehaviour
                     if (j == index)
                     {
                         shouldIterate = false;
+                        break;
                     }
                 }
 
+                if (!shouldIterate) continue;
 
                 if (gameplayManager.GetScoreList()[j] > highestScore && shouldIterate)
                 {
@@ -212,6 +225,11 @@ public class GameOverResultUI : MonoBehaviour
                 {
                     winnerHorde = sortedHordeByScore[k + 1];
                 }
+                else 
+                {
+                    winnerHorde = sortedHordeByScore[k];
+                    return;
+                }
             }
         }
     }
@@ -223,22 +241,12 @@ public class GameOverResultUI : MonoBehaviour
         {
             ScoreUITemplate scoreUITemplate = Instantiate(finalScoreUITemplate, finalRankParentTransform).GetComponent<ScoreUITemplate>();
             scoreUITemplate.gameObject.SetActive(true);
-            scoreUITemplate.transform.localPosition = new Vector2(0f, i * -75f);
+            scoreUITemplate.transform.localPosition = new Vector2(0f, i * -50f);
 
             float scoreBarWidth = (sortedScoreList[i] / (ScoreUI.GetHighestScore() + 110f)) * scoreBarWidthMax;
             scoreUITemplate.Initialize(Mathf.FloorToInt(sortedScoreList[i]), scoreBarWidth + 10f);
             scoreUITemplate.scoreBar.color = gameplayManager.GetUnitMaterial(sortedHordeByScore[i]).color;
         }
-
-        /*
-        if (winnerHorde == playerHorde)
-        {
-            ShowVictoryTemplate();
-        }
-        else
-        {
-            ShowDefeatTemplate();
-        }*/
     }
 
 

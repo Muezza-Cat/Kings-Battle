@@ -31,17 +31,20 @@ public class UnitTemplateUI : MonoBehaviour
     [SerializeField] private Button selectionButton;
     private TextMeshProUGUI selectionButtonText;
     
-    /*Testing*/
     [SerializeField] private Button watchAdsButton;
     private TextMeshProUGUI watchAdsButtonText;
 
+    [SerializeField] private TextMeshProUGUI statsInfo;
+
+    [SerializeField] private Sprite grayedButtonSprite;
+    [SerializeField] private Sprite redButtonSprite;
 
 
     [Header("Settings")]
     private const string SELECTED = "Selected";
     private const string SELECT = "Select";
 
-    private const float bgDefaultAlphaValue = 130f / 255f; //Color uses a normalized value, i.e, 0f - 1f;
+    private const float bgDefaultAlphaValue = 200f / 255f; //Color uses a normalized value, i.e, 0f - 1f;
     private const float bgSelectedAlphaValue = 1f;
 
     public bool isSelected = false;
@@ -68,16 +71,15 @@ public class UnitTemplateUI : MonoBehaviour
 
         this.templateDataSO = templateDataSO;
         unitNameText.text = templateDataSO.UNIT_NAME;
-        //unitImage.sprite = templateDataSO.unitSprite; //Incomplete
+        unitImage.sprite = templateDataSO.unitSprite; //Incomplete
+        backgroundImage.color = templateDataSO.templateBGColor;
+        statsInfo.text = $"Dmg : {templateDataSO.damage}\n HP : {templateDataSO.hp}";
 
         //Testing
         remainingAdsCount = remainingAdsToWatch;
 
         if (isLocked == 1) TemplateButtonsOnLocked(remainingAdsToWatch);
         else TemplateButtonOnUnlocked();
-
-        Debug.Log("Remaining ads count : " + remainingAdsCount + " " + this.name);
-        Debug.Log("Remaining ads to watch : " + remainingAdsToWatch + " " + this.name);
     }
 
 
@@ -159,10 +161,23 @@ public class UnitTemplateUI : MonoBehaviour
         backgroundImage.color = color;
     }
 
-
+    public TemplateDataSO GetTemplateDataSO()
+    {
+        return templateDataSO;
+    }
 
     public UnitTemplateSO GetUnitTemplateSO()
     {
         return templateDataSO.unitTemplateSO;
+    }
+
+    public void GrayOutWatchAdsButton()
+    {
+        watchAdsButton.image.sprite = grayedButtonSprite;
+    }
+
+    public void RedOutWatchAdsButton()
+    {
+        watchAdsButton.image.sprite = redButtonSprite;
     }
 }

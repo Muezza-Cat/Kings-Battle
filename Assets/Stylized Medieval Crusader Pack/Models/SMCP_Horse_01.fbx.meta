@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 3f95b8b6a98f7a247ba931aa0218d175
+AssetOrigin:
+  serializedVersion: 1
+  productId: 403490
+  packageName: "Stylized Medieval Crusaders Pack \u2013 Low Poly Characters & Units"
+  packageVersion: 1.0
+  assetPath: Assets/Stylized Medieval Crusader Pack/Models/SMCP_Horse_01.fbx
+  uploadId: 1002186
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -100,7 +107,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
@@ -108,10 +115,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 403490
-  packageName: "Stylized Medieval Crusaders Pack \u2013 Low Poly Characters & Units"
-  packageVersion: 1.0
-  assetPath: Assets/Stylized Medieval Crusader Pack/Models/SMCP_Horse_01.fbx
-  uploadId: 1002186

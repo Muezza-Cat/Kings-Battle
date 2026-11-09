@@ -63,7 +63,7 @@ public class EnemyIndicator : MonoBehaviour
     private float cornerAngleOffset = 10f;
     private float rightAngle = 90f;
 
-    private float indicatorDisplayCooldownTime = 0.1f;
+    private float indicatorDisplayCooldownTime = 0.02f;
     private float indicatorDisplayElapsedTime = 0f;
     private void ShowIndicator()
     {
@@ -71,8 +71,8 @@ public class EnemyIndicator : MonoBehaviour
         if (indicatorDisplayElapsedTime < indicatorDisplayCooldownTime) return;
         indicatorDisplayElapsedTime = 0f;
 
-        if (targetCamera == null || indicatorPrefab == null || indicator == null) return;
 
+        if (targetCamera == null || indicatorPrefab == null || indicator == null) return;
         //Enemy WorldPosToScreenPos
         Vector3 targetInScreenPos = targetCamera.WorldToScreenPoint(transform.position);
 
@@ -167,6 +167,10 @@ public class EnemyIndicator : MonoBehaviour
         }
     }
 
+    public GameObject GetIndicator()
+    {
+        return indicator;
+    }
 
 
     /*private void ShowIndicator()

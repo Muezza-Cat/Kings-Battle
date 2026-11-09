@@ -10,11 +10,14 @@ public class TemplateDataSO : ScriptableObject
     public Color templateBGColor;
     public string UNIT_NAME;
 
-    //Testing; Change via inspector;
     public string unit_ID;
     public int adsToWatch = 3;
     public bool isLocked = false;
 
     [HideInInspector] public const string IS_LOCKED = "isLocked_";
     [HideInInspector] public const string ADS = "ads_";
+
+    //Testing
+    public float damage;
+    public float hp;
 }
