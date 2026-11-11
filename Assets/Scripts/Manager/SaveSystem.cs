@@ -99,7 +99,7 @@ public class SaveSystem : MonoBehaviour
 
             if (saveLoadSystem.gameplayManagerSaveObject.targetSceneIndex >= SceneManager.sceneCountInBuildSettings) 
             {
-                saveLoadSystem.gameplayManagerSaveObject.targetSceneIndex = SceneManager.sceneCountInBuildSettings - 2;
+                saveLoadSystem.gameplayManagerSaveObject.targetSceneIndex = SceneManager.sceneCountInBuildSettings - 4;
             }
 
             SceneManager.LoadScene(saveLoadSystem.gameplayManagerSaveObject.targetSceneIndex);

@@ -2972,13 +2972,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6602041551962352108}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.9580955, y: 0.07107861, z: 0.14726669, w: 0.2351881}
-  m_LocalPosition: {x: -0.010974411, y: -0.15042914, z: 0.003105387}
+  m_LocalRotation: {x: 0.9759315, y: 0.079019405, z: 0.16431397, w: 0.119643405}
+  m_LocalPosition: {x: -0.099, y: -0.07, z: 0.014}
   m_LocalScale: {x: 0.6000001, y: 0.6000002, z: 0.59999996}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7229565589649026852}
-  m_LocalEulerAnglesHint: {x: 6.379, y: 163.93, z: 168.068}
+  m_LocalEulerAnglesHint: {x: 11.979, y: 159.685, z: 168.588}
 --- !u!33 &7456592048631250163
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3511,7 +3511,6 @@ MonoBehaviour:
   - {fileID: 6940673852638747033}
   - {fileID: 8715542929698052901}
   targetPosition: {x: 0, y: 0, z: 0}
-  damageAmount: 0.75
   isDetected: 0
   isFighting: 0
 --- !u!136 &8242445632696578053

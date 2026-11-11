@@ -2858,7 +2858,7 @@ PrefabInstance:
     - target: {fileID: 8397061839416777407, guid: c81f95ac36df5cf428899b949dfc0ed1, type: 3}
       propertyPath: settingsWindowUI
       value: 
-      objectReference: {fileID: 1243992944}
+      objectReference: {fileID: 0}
     - target: {fileID: 8397061839416777407, guid: c81f95ac36df5cf428899b949dfc0ed1, type: 3}
       propertyPath: mainMenuContainer
       value: 
@@ -10704,11 +10704,6 @@ GameObject:
 --- !u!1 &1243992943 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 892503045659464494, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
-  m_PrefabInstance: {fileID: 1243992939}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1243992944 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1637935667444677847, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
   m_PrefabInstance: {fileID: 1243992939}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1243992945 stripped
