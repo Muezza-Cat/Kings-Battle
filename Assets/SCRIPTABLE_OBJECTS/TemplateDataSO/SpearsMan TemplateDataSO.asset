@@ -18,6 +18,6 @@ MonoBehaviour:
   UNIT_NAME: Spears Man
   unit_ID: soldier3
   adsToWatch: 3
-  isLocked: 1
+  isLocked: 0
   damage: 1.3
   hp: 1.2

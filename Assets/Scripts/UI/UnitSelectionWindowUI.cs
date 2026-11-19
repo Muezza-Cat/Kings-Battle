@@ -42,6 +42,7 @@ public class UnitSelectionWindowUI : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.DeleteAll();
         Instance = this;
 
         unitTemplateList = new List<UnitTemplateUI>();
@@ -131,7 +132,7 @@ public class UnitSelectionWindowUI : MonoBehaviour
     private void UnitTemplateUI_OnTemplateUpdated(object sender, UnitTemplateUI.OnTemplateUpdatedEventArgs e)
     {
         selectedUnitTemplateIndex = unitTemplateList.IndexOf(e.unitTemplateUI);
-        SaveSystem.Instance.SaveData();
+        if (SaveSystem.Instance != null) SaveSystem.Instance.SaveData();
 
         ResetAllTemplates?.Invoke(this, EventArgs.Empty);
     }

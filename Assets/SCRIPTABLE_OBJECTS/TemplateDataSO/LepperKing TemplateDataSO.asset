@@ -18,6 +18,6 @@ MonoBehaviour:
   UNIT_NAME: Emperor
   unit_ID: king1
   adsToWatch: 15
-  isLocked: 1
+  isLocked: 0
   damage: 5
   hp: 5

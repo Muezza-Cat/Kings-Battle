@@ -18,6 +18,6 @@ MonoBehaviour:
   UNIT_NAME: General
   unit_ID: general1
   adsToWatch: 10
-  isLocked: 1
+  isLocked: 0
   damage: 3.5
   hp: 3.5

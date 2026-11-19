@@ -18,6 +18,6 @@ MonoBehaviour:
   UNIT_NAME: Castle Guard
   unit_ID: soldier1
   adsToWatch: 3
-  isLocked: 1
+  isLocked: 0
   damage: 1.2
   hp: 1.3

@@ -1,14 +1,64 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 
-
-
+[DefaultExecutionOrder(-10)]
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
+
+    #region Event
+    public event Action OnInteract;
+    public event Action OnAddUnits;
+    #endregion
+
     private TouchInputSystem touchInputSystem;
+
+
+
+
+    private void Awake()
+    {
+        Instance = this;
+
+        touchInputSystem = new TouchInputSystem();
+        touchInputSystem.Enable();
+    }
+
+
+    private void OnEnable()
+    {
+        touchInputSystem.Keyboard.Interact.performed += Interact_performed;
+        touchInputSystem.Keyboard.AddUnits.performed += AddUnits_performed;
+    }
+
+    private void AddUnits_performed(InputAction.CallbackContext context)
+    {
+        OnAddUnits?.Invoke();
+    }
+
+    private void Interact_performed(InputAction.CallbackContext context)
+    {
+        OnInteract?.Invoke();
+    }
+
+
+    public Vector2 GetMoveDirection()
+    {
+        return touchInputSystem.Keyboard.Move.ReadValue<Vector2>();
+    }
+
+
+    private void OnDisable()
+    {
+        touchInputSystem.Keyboard.Interact.performed -= Interact_performed;
+        touchInputSystem.Keyboard.AddUnits.performed -= AddUnits_performed;
+    }
+
+    /*private TouchInputSystem touchInputSystem;
 
     //public delegate void OnTouchEnd(Vector2 position, float time);
     //public event OnTouchEnd OnTouchEndEvent;
@@ -77,5 +127,5 @@ public class InputManager : MonoBehaviour
     {
         touchInputSystem.Touch.Disable();
         touchInputSystem.Dispose();
-    }
+    }*/
 }

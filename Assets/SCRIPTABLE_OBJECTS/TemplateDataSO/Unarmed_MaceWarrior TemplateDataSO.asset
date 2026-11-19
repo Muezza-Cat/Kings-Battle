@@ -18,6 +18,6 @@ MonoBehaviour:
   UNIT_NAME: Unarmed Mace Warrior
   unit_ID: soldier8
   adsToWatch: 1
-  isLocked: 1
+  isLocked: 0
   damage: 1.2
   hp: 0.9

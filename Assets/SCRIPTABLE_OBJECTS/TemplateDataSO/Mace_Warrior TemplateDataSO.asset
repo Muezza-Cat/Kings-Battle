@@ -18,6 +18,6 @@ MonoBehaviour:
   UNIT_NAME: Mace Warrior
   unit_ID: soldier4
   adsToWatch: 3
-  isLocked: 1
+  isLocked: 0
   damage: 1.5
   hp: 1

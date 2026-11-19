@@ -3,6 +3,118 @@
     "name": "TouchInputSystem",
     "maps": [
         {
+            "name": "Keyboard",
+            "id": "8cf4ab86-6eac-49cd-8cb4-80cbcd8dd878",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "f6c06214-79af-460d-b3e5-1173f8171988",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AddUnits",
+                    "type": "Button",
+                    "id": "29439b6f-c448-4cc3-837a-54e9eb99d9b5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "62cd34c3-f8a1-4789-84f3-b2b9fe26ca00",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "81ab7cf5-4d33-4324-92ba-f01695133fa5",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0e40d4b4-914b-4c78-b7cf-b048266a2f04",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "865fbb39-2791-4950-b1ad-066a82e93a21",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "25af5d35-1669-4906-90f2-614f00a80d93",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "786a38ab-c510-4917-9e7d-32f5c0e147de",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "25a1e197-f327-453c-9f83-0d45d4c913c4",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddUnits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a671b47-a34e-4e04-a247-fdd20a8bd1db",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Touch",
             "id": "016dee66-4277-4c45-adf8-5e27733347ab",
             "actions": [

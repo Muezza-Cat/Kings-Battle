@@ -27,6 +27,7 @@ public class SaveSystem : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log(Application.persistentDataPath);
         if (Instance == null)
         {
             Instance = this;

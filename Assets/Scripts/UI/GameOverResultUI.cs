@@ -86,7 +86,7 @@ public class GameOverResultUI : MonoBehaviour
 
         nextButton.onClick.AddListener(() =>
         {
-            AdsManager.Instance.ShowInterstitialAd();
+            if(AdsManager.Instance != null) AdsManager.Instance.ShowInterstitialAd();
             SceneLoader.LoadScene(/*(SceneLoader.Scene) SceneManager.GetActiveScene().buildIndex*/ SceneManager.GetActiveScene().buildIndex + 1);
             levelNumber++;
 
@@ -95,7 +95,7 @@ public class GameOverResultUI : MonoBehaviour
         });
         restartButton.onClick.AddListener(() =>
         {
-            AdsManager.Instance.ShowInterstitialAd();
+            if(AdsManager.Instance != null) AdsManager.Instance.ShowInterstitialAd();
             SceneLoader.ReloadSceneAsRestartGame();
             //OnRestartLevel();
         });

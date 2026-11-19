@@ -261,10 +261,8 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            if (baseController != null && baseController.GetRotation() != Vector3.zero) 
-            {
-                transform.eulerAngles = new Vector3(0f, baseController.GetRotation().y, 0f);
-            } 
+            if (InputManager.Instance.GetMoveDirection() == Vector2.zero) return;
+            transform.eulerAngles = new Vector3(0f, baseController.GetRotation().y, 0f);
         }
     }
 

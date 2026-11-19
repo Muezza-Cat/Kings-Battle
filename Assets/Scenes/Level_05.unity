@@ -30530,6 +30530,10 @@ PrefabInstance:
       value: EnemyManager
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
+      propertyPath: enemyTemplateDataSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 03b21d084b051a04c95d60040b0f56ac, type: 2}
+    - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.size
       value: 2
       objectReference: {fileID: 0}

@@ -24,26 +24,40 @@ public class AddUnitsUIButton : MonoBehaviour
         Instance = this;
 
         button = GetComponent<Button>();
+        if (button == null) Debug.Log("Add units button is null");
         buttonImage = GetComponent<Image>();
 
         clickableButtonAlphaTransparency = 1f;
         unclickableButtonAlphaTransparency = 80f / 255f;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         button.onClick.AddListener(() =>
         {
             GameplayManager.Instance.playerHorde.AddUnit();
         });
+
+        InputManager.Instance.OnAddUnits += InputManager_OnAddUnits;
     }
 
+    private void OnDisable()
+    {
+        InputManager.Instance.OnAddUnits -= InputManager_OnAddUnits;
+    }
 
+    private void InputManager_OnAddUnits()
+    {
+        button.onClick?.Invoke();
+        Debug.Log("Pressed the button;");
+    }
 
     private float uiElemsResetTime = 0.1f;
     private float uiElemsUpdateElapsedTime = 0f;
     private void Update()
     {
+        if (unitCountText == null) return;
+
         uiElemsUpdateElapsedTime += Time.deltaTime;
         if (uiElemsUpdateElapsedTime < uiElemsResetTime) return;
         uiElemsUpdateElapsedTime = 0f;

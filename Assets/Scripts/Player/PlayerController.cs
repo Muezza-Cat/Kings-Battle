@@ -106,7 +106,8 @@ public class PlayerController : BaseController
 
     public override Vector3 GetRotation()
     {
-        return new Vector3(0f, Mathf.Atan2(InputManager.Instance.GetMoveDirection().x, InputManager.Instance.GetMoveDirection().y) * Mathf.Rad2Deg, 0f);
+        //if(InputManager.Instance.GetMoveDirection() == Vector2.zero) return Vector2.zero;
+        /*else */return new Vector3(0f, Mathf.Atan2(InputManager.Instance.GetMoveDirection().x, InputManager.Instance.GetMoveDirection().y) * Mathf.Rad2Deg, 0f);
     }
 
     public override float GetNormalMoveSpeed()

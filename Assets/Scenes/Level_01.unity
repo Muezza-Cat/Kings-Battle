@@ -814,6 +814,10 @@ PrefabInstance:
       value: YOU
       objectReference: {fileID: 0}
     - target: {fileID: 5967288537517631480, guid: f09da0ef30be45d4e8772f2c63cc5802, type: 3}
+      propertyPath: kingLocation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5967288537517631480, guid: f09da0ef30be45d4e8772f2c63cc5802, type: 3}
       propertyPath: unitSpacingX_Axis
       value: 1.1
       objectReference: {fileID: 0}

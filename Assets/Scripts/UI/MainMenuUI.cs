@@ -53,7 +53,9 @@ public class MainMenuUI : MonoBehaviour
         {
             gameStateManager.state = GameStateManager.State.TouchToStart;
 
-            touchInputSystem.Touch.Touch.started += OnTapToPlay; //For TouchInput;
+            //touchInputSystem.Touch.Touch.started += OnTapToPlay; //For TouchInput;
+            //For windows build
+            InputManager.Instance.OnInteract += OnTapToPlayWindowsBuild;
             touchInputSystem.Enable();
 
             OnPlayButtonPressed();
@@ -100,5 +102,18 @@ public class MainMenuUI : MonoBehaviour
         touchInputSystem.Touch.Touch.started -= OnTapToPlay;
         touchInputSystem.Touch.Disable();
         touchInputSystem.Dispose();
+    }
+
+    public void OnTapToPlayWindowsBuild()
+    {
+        Debug.Log("TouchStarted");
+        gameStateManager.state = GameStateManager.State.StartCountdown;
+
+        //uiManager.EnableJoystickUI(); 
+        uiManager.DisableTouchToStartUI();
+
+        InputManager.Instance.OnInteract -= OnTapToPlayWindowsBuild;
+        //touchInputSystem.Touch.Disable();
+        //touchInputSystem.Dispose();
     }
 }
