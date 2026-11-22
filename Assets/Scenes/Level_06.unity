@@ -8847,7 +8847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.data[1].difficultyMode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.data[0].enemyController

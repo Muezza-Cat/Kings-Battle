@@ -30559,7 +30559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.data[1].difficultyMode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.data[0].enemyController
@@ -30975,7 +30975,7 @@ MonoBehaviour:
   m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
 --- !u!4 &8528410969986943549
@@ -31010,7 +31010,7 @@ MonoBehaviour:
   m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
 --- !u!4 &8540284269801155405

@@ -1,5 +1,5 @@
 using System;
-using Unity.Hierarchy;
+using System.Collections;
 using Unity.Services.LevelPlay;
 using UnityEngine;
 
@@ -29,7 +29,8 @@ public class AdsManager : MonoBehaviour
     private bool successfullyInitialized = false;
 
     public bool rewardedAdLoaded = false;
-
+    private int interstitialRetryAttempt;
+    private int rewardedRetryAttempt;
 
 
 
@@ -43,12 +44,15 @@ public class AdsManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+            return;
         }
     }
 
 
     private void Start()
     {
+        Debug.Log($"MY GAME: ADS MANAGER STARTED | ID: {GetInstanceID()}");
+
         LevelPlay.OnInitSuccess += LevelPlay_OnInitSuccess;
         LevelPlay.OnInitFailed += LevelPlay_OnInitFailed;
 
@@ -58,6 +62,7 @@ public class AdsManager : MonoBehaviour
 
     private void LevelPlay_OnInitSuccess(LevelPlayConfiguration obj)
     {
+        Debug.Log("MY GAME: INIT SUCCESS");
         successfullyInitialized = true;
 
         //Create Ad Objects;
@@ -68,12 +73,14 @@ public class AdsManager : MonoBehaviour
         //Load Ads before displaying them;
         interstitialAd.LoadAd();
         rewardedAd.LoadAd();
+
     }
 
     private void LevelPlay_OnInitFailed(LevelPlayInitError obj)
     {
+        Debug.Log("MY GAME: LEVELPLAY INITIALIZATION FAILED: " + obj);
+
         successfullyInitialized = false;
-        Debug.LogError("LevelPlay Initialization Failed!");
     }
 
 
@@ -85,21 +92,40 @@ public class AdsManager : MonoBehaviour
 
         interstitialAd.OnAdLoaded += InterstitialAd_OnAdLoaded;
         interstitialAd.OnAdLoadFailed += InterstitialAd_OnAdLoadFailed;
+        interstitialAd.OnAdDisplayFailed += InterstitialAd_OnAdDisplayFailed;
         interstitialAd.OnAdClosed += InterstitialAd_OnAdClosed;
     }
 
 
     private void InterstitialAd_OnAdLoaded(LevelPlayAdInfo obj)
     {
-        Debug.Log("The Interstitial Ad was loaded");
+        Debug.Log("MY GAME: The Interstitial Ad was loaded");
+        interstitialRetryAttempt = 0;
     }
     private void InterstitialAd_OnAdLoadFailed(LevelPlayAdError obj)
     {
-        Debug.Log("The Interstitial Ad was NOT loaded");
-        interstitialAd.LoadAd(); //Try load again.
+        Debug.Log($"MY GAME: Interstitial Ad was NOT Loaded ErrorMessage : {obj.ErrorMessage} ErrorCode : {obj.ErrorCode}");
+
+        interstitialRetryAttempt++;
+        float delay = Mathf.Pow(2, Mathf.Min(6, interstitialRetryAttempt));
+        StartCoroutine(RetryLoadInterstitial(delay));
+    }
+
+    private IEnumerator RetryLoadInterstitial(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        interstitialAd.LoadAd();
+    }
+
+
+    private void InterstitialAd_OnAdDisplayFailed(LevelPlayAdInfo arg1, LevelPlayAdError arg2)
+    {
+        Debug.Log("MY GAME: Interstitial Ad display failed");
+        interstitialAd.LoadAd();
     }
     private void InterstitialAd_OnAdClosed(LevelPlayAdInfo obj)
     {
+        Debug.Log("MY GAME: The Interstitial Ad was Closed");
         interstitialAd.LoadAd(); //load another ad;
     }
 
@@ -124,50 +150,54 @@ public class AdsManager : MonoBehaviour
 
         rewardedAd.OnAdLoaded += RewardedAd_OnAdLoaded;
         rewardedAd.OnAdLoadFailed += RewardedAd_OnAdLoadFailed;
+        rewardedAd.OnAdDisplayFailed += RewardedAd_OnAdDisplayFailed;
         rewardedAd.OnAdRewarded += RewardedAd_OnAdRewarded;
         rewardedAd.OnAdClosed += RewardedAd_OnAdClosed;
     }
 
+
     private void RewardedAd_OnAdLoaded(LevelPlayAdInfo obj)
     {
-        Debug.Log("Rewarded Ad was Loaded");
+        Debug.Log("MY GAME: Rewarded Ad was Loaded");
 
         rewardedAdLoaded = true;
-        //foreach (UnitTemplateUI unitTemplateUI in UnitSelectionWindowUI.Instance.GetUnitTemplateList())
-        //{
-        //    unitTemplateUI.RedOutWatchAdsButton();
-        //    Debug.Log("Red out all the unitTemplateUI's");
-        //}
-        //foreach (UnitTemplateUI unitTemplateUI in UnitSelectionWindowUI.Instance.GetUnitTemplateList())
-        //{
-        //    unitTemplateUI.GrayOutWatchAdsButton();
-        //    Debug.Log("Grayed out all the unitTemplateUI's");
-        //}
+        rewardedRetryAttempt = 0;
     }
     private void RewardedAd_OnAdLoadFailed(LevelPlayAdError obj)
     {
-        Debug.Log("Rewarded Ad was NOT Loaded");
+        Debug.Log($"MY GAME: Rewarded Ad was NOT Loaded ErrorMessage : {obj.ErrorMessage} ErrorCode : {obj.ErrorCode}");
         OnRewardedAdCompleted = null;
 
         rewardedAdLoaded = false;
-        //foreach (UnitTemplateUI unitTemplateUI in UnitSelectionWindowUI.Instance.GetUnitTemplateList())
-        //{
-        //    unitTemplateUI.GrayOutWatchAdsButton();
-        //    Debug.Log("Grayed out all the unitTemplateUI's");
-        //}
 
+        rewardedRetryAttempt++;
+        float delay = Mathf.Pow(2, Mathf.Min(6, rewardedRetryAttempt));
+        StartCoroutine(RetryLoadRewarded(delay));
+        //rewardedAd.LoadAd();
+    }
+
+    private IEnumerator RetryLoadRewarded(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
         rewardedAd.LoadAd();
     }
 
+    private void RewardedAd_OnAdDisplayFailed(LevelPlayAdInfo arg1, LevelPlayAdError arg2)
+    {
+        Debug.Log("MY GAME: Rewarded Ad display failed");
+
+        rewardedAd.LoadAd();
+    }
     private void RewardedAd_OnAdRewarded(LevelPlayAdInfo arg1, LevelPlayReward arg2)
     {
-        Debug.Log("Reward Rewarded");
+        Debug.Log("MY GAME: Reward Rewarded");
         OnRewardedAdCompleted?.Invoke();
         OnRewardedAdCompleted = null;
     }
 
     private void RewardedAd_OnAdClosed(LevelPlayAdInfo obj)
     {
+        Debug.Log("MY GAME: Rewarded Ad Closed");
         rewardedAd.LoadAd();
     }
 
@@ -189,8 +219,9 @@ public class AdsManager : MonoBehaviour
     #endregion
 
 
-    private void OnDisable()
+    private void OnDestroy()
     {
+        if (Instance != this) return;
         LevelPlay.OnInitSuccess -= LevelPlay_OnInitSuccess;
         LevelPlay.OnInitFailed -= LevelPlay_OnInitFailed;
     }
