@@ -7719,6 +7719,7 @@ GameObject:
   - component: {fileID: 660044913}
   - component: {fileID: 660044912}
   - component: {fileID: 660044915}
+  - component: {fileID: 660044916}
   m_Layer: 0
   m_Name: Rock 3  (1)
   m_TagString: Untagged
@@ -7818,6 +7819,27 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!65 &660044916
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660044911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.857164, y: 1.9797989, z: 8.030792}
+  m_Center: {x: 0.0052108765, y: 0.9853564, z: 0.099998}
 --- !u!1 &661276424
 GameObject:
   m_ObjectHideFlags: 0
@@ -29775,6 +29797,7 @@ GameObject:
   - component: {fileID: 4633886581272332340}
   - component: {fileID: 136758676407882574}
   - component: {fileID: 8793908307054869668}
+  - component: {fileID: 8793908307054869669}
   m_Layer: 0
   m_Name: 'Rock 3 '
   m_TagString: Untagged
@@ -30535,11 +30558,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.data[0].difficultyMode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.data[1].difficultyMode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.data[0].enemyController
@@ -30955,7 +30978,7 @@ MonoBehaviour:
   m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
 --- !u!4 &8528410969986943549
@@ -30990,7 +31013,7 @@ MonoBehaviour:
   m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
 --- !u!4 &8540284269801155405
@@ -31325,6 +31348,27 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!65 &8793908307054869669
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6985135929519132598}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.857164, y: 1.9797989, z: 8.030792}
+  m_Center: {x: 0.0052108765, y: 0.9853564, z: 0.099998}
 --- !u!33 &8929449057469592908
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -17301,6 +17301,10 @@ PrefabInstance:
       value: Enemy6
       objectReference: {fileID: 0}
     - target: {fileID: 3159535480265436461, guid: f8e9242fcca0bff43ba325ab269cc173, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 155bf554ee31b3941b9e0c87d4fc6662, type: 2}
+    - target: {fileID: 3159535480265436461, guid: f8e9242fcca0bff43ba325ab269cc173, type: 3}
       propertyPath: unitSpacingX_Axis
       value: 1.1
       objectReference: {fileID: 0}
