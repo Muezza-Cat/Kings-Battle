@@ -1583,7 +1583,7 @@ PrefabInstance:
       objectReference: {fileID: 198117633}
     - target: {fileID: 7221456181935507814, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
       propertyPath: interactableLayer.m_Bits
-      value: 379
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8360593538824347509, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3318,7 +3318,7 @@ PrefabInstance:
       objectReference: {fileID: 198117633}
     - target: {fileID: 7266921873276030483, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
       propertyPath: interactableLayer.m_Bits
-      value: 443
+      value: 187
       objectReference: {fileID: 0}
     - target: {fileID: 7973212976784409572, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
       propertyPath: indicatorPrefab

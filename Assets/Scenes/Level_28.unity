@@ -7968,6 +7968,10 @@ PrefabInstance:
       value: EnemyManager
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
+      propertyPath: enemyTemplateDataSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 942ae094dd76eab41a4ff6a3bc96dfc2, type: 2}
+    - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -17185,6 +17189,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4294364616689715532, guid: 21e44cab57f53f2499e4508310b362bc, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b1a0bcc4a7994014f83565f13ad06149, type: 2}
+    - target: {fileID: 4294364616689715532, guid: 21e44cab57f53f2499e4508310b362bc, type: 3}
       propertyPath: unitSpacingX_Axis
       value: 1.1
       objectReference: {fileID: 0}
@@ -17591,6 +17599,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1058848512}
     - target: {fileID: 2272678018045717959, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 603c0cbfed7064c459dc4d548b11bcab, type: 2}
+    - target: {fileID: 2272678018045717959, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
       propertyPath: unitSpacingX_Axis
       value: 1.1
       objectReference: {fileID: 0}
@@ -17990,6 +18002,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4207408443929801695, guid: 0b4cc5fb2e5fb6544b97c0575f6ae543, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c8afc6fb33727747a39c45816b3e8de, type: 2}
+    - target: {fileID: 4207408443929801695, guid: 0b4cc5fb2e5fb6544b97c0575f6ae543, type: 3}
       propertyPath: unitSpacingX_Axis
       value: 1.1
       objectReference: {fileID: 0}
@@ -18106,6 +18122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4351644443582324438, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: daf5849275b54a64e88e14a972d11a81, type: 2}
     - target: {fileID: 4351644443582324438, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 904
@@ -18248,6 +18268,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014645796197828559, guid: 0d18d49a0a95a4e44bba62c6c7d68701, type: 3}
+      propertyPath: enemyUnit
+      value: 
+      objectReference: {fileID: 5159713455120295322, guid: 8109e4397752edd42ac623eb11f3daf6, type: 3}
     - target: {fileID: 4211474050229418558, guid: 0d18d49a0a95a4e44bba62c6c7d68701, type: 3}
       propertyPath: m_Name
       value: ObjectPooler

@@ -48,7 +48,7 @@ public class AddUnitsUIButton : MonoBehaviour
         if (uiElemsUpdateElapsedTime < uiElemsResetTime) return;
         uiElemsUpdateElapsedTime = 0f;
 
-        unitCountText.text = $"{GameplayManager.Instance.playerHorde.GetUnitCount()} / 26";
+        unitCountText.text = $"{GameplayManager.Instance.playerHorde.GetUnitCount()} / 24";
 
         if (GameplayManager.Instance.playerHorde.IsFlagNearby() || (GameplayManager.Instance.playerHorde.transform.position - GameplayManager.Instance.GetHomeTransform(GameplayManager.Instance.playerHorde).position).sqrMagnitude < 10f * 10f)
         {

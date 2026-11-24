@@ -8862,7 +8862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
   playerUnitPrefab: {fileID: 7527805401979450706, guid: 7e6e5ff87abeefa4295f83d335855511, type: 3}
-  enemyUnit: {fileID: 7527805401979450706, guid: 7e6e5ff87abeefa4295f83d335855511, type: 3}
+  enemyUnit: {fileID: 1986856463648919984, guid: 7558a285d0ccc1148be722d3671b3652, type: 3}
   coin: {fileID: 6384939856516394034, guid: cc0e16b5186359741a9643d2b9ee32df, type: 3}
   apple: {fileID: 1760411025357657607, guid: 5b96440f5adbb154e9ab819adaca348e, type: 3}
   maxUnitCapacityInHorde: 25
@@ -13692,6 +13692,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4294364616689715532, guid: 21e44cab57f53f2499e4508310b362bc, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b1a0bcc4a7994014f83565f13ad06149, type: 2}
+    - target: {fileID: 4294364616689715532, guid: 21e44cab57f53f2499e4508310b362bc, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 712
       objectReference: {fileID: 0}
@@ -13753,7 +13757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7436323772182846268, guid: 21e44cab57f53f2499e4508310b362bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 7436323772182846268, guid: 21e44cab57f53f2499e4508310b362bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13882,6 +13886,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4351644443582324438, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: daf5849275b54a64e88e14a972d11a81, type: 2}
     - target: {fileID: 4351644443582324438, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 904
@@ -14773,7 +14781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3003357867994417745, guid: 0b4cc5fb2e5fb6544b97c0575f6ae543, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 3003357867994417745, guid: 0b4cc5fb2e5fb6544b97c0575f6ae543, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14807,6 +14815,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4207408443929801695, guid: 0b4cc5fb2e5fb6544b97c0575f6ae543, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c8afc6fb33727747a39c45816b3e8de, type: 2}
     - target: {fileID: 4207408443929801695, guid: 0b4cc5fb2e5fb6544b97c0575f6ae543, type: 3}
       propertyPath: formationJitter
       value: 0
@@ -21467,6 +21479,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 182084147}
     - target: {fileID: 2272678018045717959, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
+      propertyPath: unitMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 603c0cbfed7064c459dc4d548b11bcab, type: 2}
+    - target: {fileID: 2272678018045717959, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
       propertyPath: formationJitter
       value: 0
       objectReference: {fileID: 0}
@@ -21540,7 +21556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8360593538824347509, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 8360593538824347509, guid: dfe66e5395f32074b953d63f01d1e581, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25252,7 +25268,7 @@ PrefabInstance:
       objectReference: {fileID: 1239948662}
     - target: {fileID: 5801817778734288414, guid: da5997d21500a2e449819ef3cfd28a1f, type: 3}
       propertyPath: gameplayTimeMax
-      value: 25
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31294,6 +31310,10 @@ PrefabInstance:
       value: EnemyManager
       objectReference: {fileID: 0}
     - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
+      propertyPath: enemyTemplateDataSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 0177efcaf7fb9a848a85373071738e98, type: 2}
+    - target: {fileID: 6932960212150105986, guid: 84aca3ce066accd4db8d72d7523090c0, type: 3}
       propertyPath: difficultyModes.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -31735,7 +31755,7 @@ MonoBehaviour:
   m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
 --- !u!4 &8528410969986943549
@@ -31770,7 +31790,7 @@ MonoBehaviour:
   m_Area: 1
   m_OverrideGenerateLinks: 0
   m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
+  m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
 --- !u!4 &8540284269801155405

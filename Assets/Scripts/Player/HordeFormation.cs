@@ -102,11 +102,11 @@ public class HordeFormation : MonoBehaviour
 
 
     //Unit position specification;
-    private int totalIterationsRequired = 26; //Including the king's position;
+    private int totalIterationsRequired = 24; //Including the king's position;
     private void EvaluatePoints(bool kingInCenter)
     {
         float zPosMultiplier = (kingInCenter) ? 1f : -1f;
-        if (kingInCenter) numberOfRows++;
+        //if (kingInCenter) numberOfRows++;
 
         for (float z = 1; z <= numberOfRows; z++)
         {
@@ -124,7 +124,7 @@ public class HordeFormation : MonoBehaviour
 
             for (float x = 0; x < numberOfColumns; x++)
             {
-                if (points.Count >= totalIterationsRequired) return;
+                //if (points.Count >= totalIterationsRequired) return;
 
                 float xPos;
                 xPos = x;
