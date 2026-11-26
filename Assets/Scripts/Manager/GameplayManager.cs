@@ -198,7 +198,7 @@ public class GameplayManager : MonoBehaviour
                 if (hordeFormation == playerHorde) GameStateManager.Instance.state = GameStateManager.State.Over;
                 
                 hordeFormation.gameObject.SetActive(false);
-                hordeFormation.GetComponent<EnemyIndicator>().GetIndicator().SetActive(false);
+                if(hordeFormation != playerHorde) hordeFormation.GetComponent<EnemyIndicator>().GetIndicator().SetActive(false);
                 hordeFormation.gameObject.transform.position = Vector3.zero;
                 aliveHordeFormations.Remove(hordeFormation);
                 hordeFormation.UpdatePlayerLives -= PlayerLivesCounterRemake;
