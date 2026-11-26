@@ -22,6 +22,7 @@ public class GameplayManager : MonoBehaviour
         public Transform home;
         public HordeFormation hordeFormation;
         public Material unitMaterial;
+        public string hordeName;
     }
 
 
@@ -37,6 +38,7 @@ public class GameplayManager : MonoBehaviour
 
     [Header("Reference")]
     public HordeFormation playerHorde;
+    [SerializeField] private TextMeshProUGUI deathMsgText;
 
 
     [Header("Settings")]
@@ -200,10 +202,36 @@ public class GameplayManager : MonoBehaviour
                 hordeFormation.gameObject.transform.position = Vector3.zero;
                 aliveHordeFormations.Remove(hordeFormation);
                 hordeFormation.UpdatePlayerLives -= PlayerLivesCounterRemake;
+
+                StartCoroutine(DeadDisplayRoutine(GetHordeName(hordeFormation), GetUnitMaterial(hordeFormation).color));
             }
         }
 
         if (IsPlayerTheOnlySurviver()) GameStateManager.Instance.state = GameStateManager.State.Over;
+    }
+
+    private IEnumerator DeadDisplayRoutine(string kingName, Color color)
+    {
+        deathMsgText.gameObject.SetActive(true);
+        deathMsgText.color = color;
+        deathMsgText.text = $"{kingName} Has Died";
+        yield return new WaitForSeconds(2.6f);
+        deathMsgText.gameObject.SetActive(false);
+    }
+
+    private string GetHordeName(HordeFormation hordeFormation)
+    {
+        string hordeName = "Someone";
+        foreach (HordeData hordeHome in hordeHomeList)
+        {
+            if (hordeHome.hordeFormation == hordeFormation)
+            {
+                hordeName =  hordeHome.hordeName;
+                break;
+            }
+        }
+
+        return hordeName;
     }
 
 

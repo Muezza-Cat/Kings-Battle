@@ -10609,6 +10609,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8541554271008574191, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8768966230430848394, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13074,6 +13078,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2140240292298462610}
     - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: deathMsgText
+      value: 
+      objectReference: {fileID: 1934412759}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
       propertyPath: flagList.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -13141,6 +13149,30 @@ PrefabInstance:
       propertyPath: hordeHomeList.Array.data[5].home
       value: 
       objectReference: {fileID: 1448210224}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[0].hordeName
+      value: YOU
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[1].hordeName
+      value: Julius Caesar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[2].hordeName
+      value: Alexander
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[3].hordeName
+      value: Saladin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[4].hordeName
+      value: Ashoka
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[5].hordeName
+      value: Mansa Musa
+      objectReference: {fileID: 0}
     - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
       propertyPath: hordeHomeList.Array.data[2].unitMaterial
       value: 
@@ -15718,6 +15750,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 922410933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1934412759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2087269685730396386, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
+  m_PrefabInstance: {fileID: 1243992939}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1955334150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18364,7 +18407,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: daf5849275b54a64e88e14a972d11a81, type: 2}
     - target: {fileID: 4351644443582324438, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
       propertyPath: enemyLayer.m_Bits
-      value: 1928
+      value: 10120
       objectReference: {fileID: 0}
     - target: {fileID: 4351644443582324438, guid: 1aec603f7ea530148bca304418f5afa0, type: 3}
       propertyPath: unitSpacingX_Axis

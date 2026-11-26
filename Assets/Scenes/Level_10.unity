@@ -2146,6 +2146,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1104358768}
     - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: deathMsgText
+      value: 
+      objectReference: {fileID: 5525145431007289898}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
       propertyPath: flagList.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -2193,6 +2197,22 @@ PrefabInstance:
       propertyPath: hordeHomeList.Array.data[3].home
       value: 
       objectReference: {fileID: 1278958294}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[0].hordeName
+      value: YOU
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[1].hordeName
+      value: Julius Caesar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[2].hordeName
+      value: Alexander
+      objectReference: {fileID: 0}
+    - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
+      propertyPath: hordeHomeList.Array.data[3].hordeName
+      value: Saladin
+      objectReference: {fileID: 0}
     - target: {fileID: 6725652628209004742, guid: e8e835835c0800a428f87fbfcdcb3cbc, type: 3}
       propertyPath: hordeHomeList.Array.data[2].unitMaterial
       value: 
@@ -20036,6 +20056,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &5525145431007289898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2087269685730396386, guid: 59fbdeec2e7cab44a921a318e137881a, type: 3}
+  m_PrefabInstance: {fileID: 5525145431007289895}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &6149281192289756687
 GameObject:
   m_ObjectHideFlags: 0
